@@ -2,9 +2,9 @@ import React from "react";
 import {Typography} from "@mui/material";
 import Box from "@mui/material/Box";
 import Grid from '@mui/material/Grid';
-import CategoryCard from "./CategoryCard";
+import CategoryButton from "./CategoryButton";
 
-const categories = ["Odpadové hospodářství", "Vzdělávání", "Analýzy", "Energetika", "Obnova krajiny", "Právo", "Data", "Zpravodajství", "Transformace"];
+const categorySelection = ["Odpadové hospodářství", "Analýzy", "Energetika", "Obnova krajiny", "Právo", "Zpravodajství", "Transformace"];
 
 function Categories() {
     return (
@@ -15,9 +15,9 @@ function Categories() {
                         Kategorie projektů
                     </Typography>
                 </Grid>
-                {categories.map((category, index) => (
+                {categorySelection.map((category, index) => (
                     <Grid item xs={12} sm={6} md={4} justifyContent="center" alignItems="center" sx={{display: "flex"}}>
-                        <CategoryCard key={index} name={category}/>
+                        <CategoryButton key={index} name={category}/>
                     </Grid>
                     )
                 )}

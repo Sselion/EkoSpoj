@@ -6,7 +6,7 @@ import {Toolbar} from "@mui/material";
 interface CardProps {
     name: string
 }
-function CategoryCard(props: CardProps) {
+function CategoryButton(props: CardProps) {
     return (
         <Toolbar>
             <Button sx={{
@@ -30,5 +30,5 @@ function CategoryCard(props: CardProps) {
     )
 }
 
-export default CategoryCard;
+export default CategoryButton;
 
