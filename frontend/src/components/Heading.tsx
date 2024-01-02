@@ -2,9 +2,9 @@ import React from "react";
 import Box from "@mui/material/Box";
 import {Typography} from "@mui/material";
 
-function Header() {
+function Heading() {
     return (
-        <Box sx={{p: 3, textAlign: "center", maxWidth: "70%", margin: '0 auto', mt: 8}}>
+        <Box sx={{p: 3, textAlign: "center", maxWidth: "70%", margin: '0 auto', mt: 12}}>
             <Typography variant="h3" sx={{mb: 2}}>
                 O nás
             </Typography>
@@ -18,4 +18,4 @@ function Header() {
     )
 }
 
-export default Header;
+export default Heading;
