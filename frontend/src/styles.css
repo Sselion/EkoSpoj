@@ -1,0 +1,11 @@
+html {
+    background-color: #FBFFFF;
+    background-image: url("/images/back3.png");
+    background-repeat: no-repeat;
+    background-position: right;
+    background-size: contain;
+}
+
+body {
+    height: 100%;
+}

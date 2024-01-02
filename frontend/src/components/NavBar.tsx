@@ -7,17 +7,22 @@ function NavBar() {
         <AppBar sx={{backgroundColor: "white"}}>
             <Box ml={5} mr={5}>
                 <Toolbar>
-                    <Typography variant="h4" sx={{flexGrow: 1, color: "#297229"}}>
+                    <Typography variant="h4" sx={{flexGrow: 1, color: "#2B6048"}}>
                         EkoSpoj
                     </Typography>
                     <Button
                         sx={{
-                            color: "#297229",
+                            color: "#2B6048",
                             "&:hover": {
-                                backgroundColor: "#e8ffe8"
+                                backgroundColor: "#83C089",
+                                color: "white"
                             }
                         }}
-                    >Rozcestník</Button>
+                    >
+                        <Typography variant="subtitle1" display="block" >
+                        Rozcestník
+                        </Typography>
+                    </Button>
                 </Toolbar>
             </Box>
         </AppBar>
