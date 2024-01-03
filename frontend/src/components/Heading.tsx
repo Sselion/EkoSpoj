@@ -11,7 +11,7 @@ interface HeadingProps {
 function Heading({name, about, size}:HeadingProps) {
     return (
         <Box sx={{p: 3, textAlign: "center", maxWidth: "70%", margin: '0 auto', mt: size}}>
-            <Paper sx={{display: "flex", flexDirection: "column", py: 2}}>
+            <Paper sx={{display: "flex", flexDirection: "column", py: 2, backgroundColor: "rgba(256, 256, 256, 0.5)"}}>
             <Typography variant="h3" sx={{mb: 2}}>
                 {name}
             </Typography>

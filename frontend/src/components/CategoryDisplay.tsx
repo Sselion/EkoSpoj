@@ -11,10 +11,6 @@ function CategoryDisplay() {
     return (
         <Box display="flex"
              sx={{p: 3, textAlign: "center", maxWidth: "70%", margin: '0 auto', mt: 0, flexDirection: 'column'}}>
-            <Typography variant="h3" sx={{mb: 2.5}}>
-                Projekty
-            </Typography>
-
             <Box sx={{display: "flex", textAlign: "center"}}>
                 <Grid container spacing={1} sx={{justifyContent: "center"}}>
                     {categorySelection.map((category, index) => (
