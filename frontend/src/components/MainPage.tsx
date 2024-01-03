@@ -2,7 +2,7 @@ import React from "react";
 import Box from "@mui/material/Box";
 import NavBar from "./NavBar";
 import Heading from "./Heading";
-import Categories from "./CategorySelection";
+import CategorySelection from "./CategorySelection";
 
 
 const name = "O nás";
@@ -15,7 +15,7 @@ function MainPage() {
         <>
             <NavBar/>
             <Heading name={name} about={about} size={10} />
-            <Categories />
+            <CategorySelection />
         </>
 
     )

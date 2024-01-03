@@ -8,8 +8,8 @@ const categorySelection = ["Odpadové hospodářství", "Analýzy", "Energetika"
 
 function Categories() {
     return (
-        <Box display="flex" sx={{p: 3, textAlign: "center", maxWidth: "900px", margin: '0 auto', mt: 5}}>
-            <Grid container>
+        <Box display="flex" sx={{p: 3, textAlign: "center", maxWidth: "900px", margin: '0 auto'}}>
+            <Grid container mt={0}>
                 <Grid item xs={12}>
                     <Typography variant="h3" sx={{mb: 2.5}}>
                         Kategorie projektů
