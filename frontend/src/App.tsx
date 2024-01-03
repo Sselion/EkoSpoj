@@ -10,8 +10,8 @@ function App() {
     return (
         <Router>
             <Routes>
-                {/*<Route path="/" element={<MainPage/>}/>*/}
-                <Route path="/" element={<CategoryPage/>}/>
+                <Route path="/" element={<MainPage/>}/>
+                <Route path="/category" element={<CategoryPage/>}/>
             </Routes>
         </Router>
     );

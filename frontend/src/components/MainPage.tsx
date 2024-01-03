@@ -14,7 +14,7 @@ function MainPage() {
     return(
         <>
             <NavBar/>
-            <Heading name={name} about={about} />
+            <Heading name={name} about={about} size={10} />
             <Categories />
         </>
 
