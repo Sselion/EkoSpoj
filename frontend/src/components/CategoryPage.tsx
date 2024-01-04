@@ -5,6 +5,7 @@ import CategoryDisplay from "./CategoryDisplay";
 import Grid from "@mui/material/Grid";
 import ProjectTag from "./ProjectTag";
 import Box from "@mui/material/Box";
+import ProjectModal from "./ProjectModal";
 
 const name = "Vybraná kategorie";
 const about = "Tady naleznete vybraný ekologický projekt. Tady naleznete vybraný ekologický projekt. Tady naleznete vybraný ekologický projekt. Tady naleznete vybraný ekologický projekt. Tady naleznete vybraný ekologický projekt. Tady naleznete vybraný ekologický projekt."
@@ -24,7 +25,6 @@ function CategoryPage() {
             </Box>
             <Heading name={name} about={about} size={2}/>
             <CategoryDisplay />
-
         </>
     )
 }
