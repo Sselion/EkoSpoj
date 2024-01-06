@@ -4,13 +4,9 @@ namespace Ekospoj.Data;
 
 public class ProjectDbContext : DbContext
 {
-    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+    public ProjectDbContext(DbContextOptions option) : base(option)
     {
-        if (!optionsBuilder.IsConfigured)
-        {
-            optionsBuilder.UseSqlServer("{ConnectionString}");
-        }
-        
+
     }
 
     public DbSet<Project> Projects { get; set; }
