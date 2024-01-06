@@ -12,8 +12,8 @@ namespace Ekospoj.Controllers
         public IActionResult GetAllCategories()
         {
 
-           
-            return Ok(categories);
+
+            return Ok();
         }
     }
 }

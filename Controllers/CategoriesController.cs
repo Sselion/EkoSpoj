@@ -31,7 +31,7 @@ namespace Ekospoj.Controllers
                     ShortName = "MockUpShortname3"
                 }
             };
-            return Ok();
+            return Ok(categories);
         }
     }
 }
