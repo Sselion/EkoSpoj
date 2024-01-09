@@ -181,6 +181,7 @@ ClientBin/
 orleans.codegen.cs
 
 */node_modules
+/frontend/dist
 package-lock.json
 
 # RIA/Silverlight projects
