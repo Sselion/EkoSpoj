@@ -4,9 +4,13 @@ import Box from "@mui/material/Box";
 import Grid from '@mui/material/Grid';
 import CategoryButton from "./CategoryButton";
 
-const categorySelection = ["Odpadové hospodářství", "Analýzy", "Energetika", "Obnova krajiny", "Právo", "Zpravodajství", "Transformace"];
+const categoryNavigation = ["Odpadové hospodářství", "Analýzy", "Energetika", "Obnova krajiny", "Právo", "Zpravodajství", "Transformace"];
 
-function Categories() {
+interface CategoryT {
+    apiCategories: Record<string, any>[],
+}
+
+function CategoryNavigation({apiCategories}: CategoryT) {
     return (
         <Box display="flex" sx={{p: 3, textAlign: "center", maxWidth: "900px", margin: '0 auto'}}>
             <Grid container mt={0}>
@@ -15,9 +19,9 @@ function Categories() {
                         Kategorie projektů
                     </Typography>
                 </Grid>
-                {categorySelection.map((category, index) => (
+                {apiCategories.map((category, index) => (
                     <Grid item xs={12} sm={6} md={4} justifyContent="center" alignItems="center" sx={{display: "flex"}}>
-                        <CategoryButton key={index} name={category}/>
+                        <CategoryButton key={index} name={category.name}/>
                     </Grid>
                     )
                 )}
@@ -26,4 +30,4 @@ function Categories() {
     )
 }
 
-export default Categories;
+export default CategoryNavigation;

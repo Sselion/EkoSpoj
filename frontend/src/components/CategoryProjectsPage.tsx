@@ -7,7 +7,7 @@ import ProjectCard from "./ProjectCard";
 
 const categorySelection = ["Odpadové hospodářství", "Analýzy", "Energetika", "Obnova krajiny", "Právo", "Zpravodajství", "Transformace"];
 
-function CategoryDisplay() {
+function CategoryProjectsPage() {
     return (
         <Box display="flex"
              sx={{p: 3, textAlign: "center", maxWidth: "70%", margin: '0 auto', mt: 0, flexDirection: 'column'}}>
@@ -25,4 +25,4 @@ function CategoryDisplay() {
     )
 }
 
-export default CategoryDisplay;
+export default CategoryProjectsPage;

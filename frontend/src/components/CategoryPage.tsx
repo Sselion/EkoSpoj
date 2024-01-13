@@ -1,7 +1,7 @@
 import React from "react";
 import NavBar from "./NavBar";
 import Heading from "./Heading";
-import CategoryDisplay from "./CategoryDisplay";
+import CategoryProjectsPage from "./CategoryProjectsPage";
 import Grid from "@mui/material/Grid";
 import ProjectTag from "./ProjectTag";
 import Box from "@mui/material/Box";
@@ -24,7 +24,7 @@ function CategoryPage() {
                 </Grid>
             </Box>
             <Heading name={name} about={about} size={2}/>
-            <CategoryDisplay />
+            <CategoryProjectsPage />
         </>
     )
 }
