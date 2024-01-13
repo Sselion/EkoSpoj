@@ -6,8 +6,8 @@
         public string Value { get; set; }
 
         // Navigation properties
-        public List<Project> Projects { get; set; }
+        public virtual List<Project> Projects { get; set; }
         public Guid ContactTypeId { get; set; }
-        public ContactType ContactType { get; set; }
+        public virtual ContactType ContactType { get; set; }
     }
 }

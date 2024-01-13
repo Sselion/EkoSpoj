@@ -1,5 +1,5 @@
 ﻿using Ekospoj.Data;
-using Microsoft.AspNetCore.Http;
+using EkoSpojTest4.Conteiners;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Ekospoj.Controllers
@@ -8,30 +8,21 @@ namespace Ekospoj.Controllers
     [ApiController]
     public class CategoriesController : ControllerBase
     {
+        private readonly ProjectDbContext dbContext;
+        public CategoriesController(ProjectDbContext projectDbContext)
+        {
+            dbContext = projectDbContext;
+        }
+
         [HttpGet]
         public IActionResult GetAllCategories()
         {
-            List<Category> categories = new List<Category> {
-                new Category
-                {
-                    Id = Guid.NewGuid(),
-                    Name = "MockupNameCathegory1",
-                    ShortName = "MockUpShortname1"
-                },
-                new Category
-                {
-                    Id = Guid.NewGuid(),
-                    Name = "MockupNameCathegory2",
-                    ShortName = "MockUpShortname2"
-                },
-                new Category
-                {
-                    Id = Guid.NewGuid(),
-                    Name = "MockupNameCathegory3",
-                    ShortName = "MockUpShortname3"
-                }
-            };
-            return Ok(categories);
+            List<Category> categories = dbContext.Categories.Where(x => x.Projects.Count > 0).ToList();
+
+            List<CategoryData> categoryData = new List<CategoryData>();
+            foreach (Category category in categories) { categoryData.Add( new CategoryData(category)); }
+
+            return Ok(categoryData);
         }
     }
 }

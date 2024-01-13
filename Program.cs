@@ -4,25 +4,25 @@ using System.Net;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddRazorPages();
+//builder.Services.AddRazorPages();
 // Add services to the container.
 
 builder.Services.AddControllers();
-builder.Services.AddEndpointsApiExplorer(); ;
+builder.Services.AddControllers().AddJsonOptions(x =>
+x.JsonSerializerOptions.ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.IgnoreCycles);
+builder.Services.AddEndpointsApiExplorer(); 
+
+//string connStr = "Server=localhost;User ID=root;Password=toor;Database=ekospoj";
 
 builder.Services.AddDbContext<ProjectDbContext>(options =>
-        options.UseSqlServer(builder.Configuration.GetConnectionString("ProjectConnectionString"))
+        options.UseLazyLoadingProxies().UseMySql(connStr, ServerVersion.AutoDetect(connStr))
     );
 var app = builder.Build();
 
-if (!builder.Environment.IsDevelopment())
-{
-    builder.Services.AddHttpsRedirection(options =>
-    {
-        options.RedirectStatusCode = (int)HttpStatusCode.PermanentRedirect;
-        options.HttpsPort = 443;
-    });
-}
+app.UseCors(builder => builder
+    .AllowAnyOrigin()
+    .AllowAnyMethod()
+    .AllowAnyHeader());
 
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
@@ -34,7 +34,6 @@ if (!app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.UseRouting();
-
 
 app.MapControllerRoute(
     name: "default",

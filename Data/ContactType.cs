@@ -8,5 +8,5 @@ public class ContactType
     public string IconPath { get; set; }
 
     // Navigation properties
-    public List<Contact> Contacts { get; set; }
+    public virtual List<Contact>? Contacts { get; set; }
 }

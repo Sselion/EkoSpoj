@@ -7,7 +7,7 @@ public class Project
     public string Description { get; set; }
 
     // Navigation properties
-    public List<Tag> Tags { get; set; }
-    public List<Category> Categories { get; set; }
-    public List<Contact> Contacts { get; set; }
+    public virtual List<Tag> Tags { get; set; }
+    public virtual List<Category> Categories { get; set; }
+    public virtual List<Contact> Contacts { get; set; }
 }

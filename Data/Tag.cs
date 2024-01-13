@@ -6,5 +6,5 @@ public class Tag
     public string Name { get; set; }
 
     // Navigation properties
-    public List<Project> Projects { get; set; }
+    public virtual List<Project>? Projects { get; set; }
 }
