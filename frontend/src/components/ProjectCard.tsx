@@ -6,11 +6,11 @@ import CardMedia from '@mui/material/CardMedia';
 import {Typography} from "@mui/material";
 import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
-import SmallTag from "./SmallTag";
+import ProjectTag from "./ProjectTag";
 import ProjectModal from "./ProjectModal";
 
 interface ProjectCardProps {
-    categories: string[],
+    categories: Record<string, any>[],
 }
 
 function ProjectCard({categories}: ProjectCardProps) {
@@ -45,7 +45,7 @@ function ProjectCard({categories}: ProjectCardProps) {
                         veder a přehřívání měst.
                     </Typography>
                     <Box sx={{flexDirection: 'row'}}>
-                        {categories.map((category, index) => (<SmallTag key={index} category={category}/>))}
+                        {categories.map((category, index) => (<ProjectTag key={index} tag={category.name}/>))}
                     </Box>
                 </CardContent>
                 <CardActions sx={{pb: 2, justifyContent: "center"}}>
