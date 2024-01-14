@@ -2,21 +2,21 @@ import React, { useState }  from "react";
 import Box from "@mui/material/Box";
 import {Typography} from "@mui/material";
 import Dialog from '@mui/material/Dialog';
-import SmallTag from "./SmallTag";
+import ProjectTag from "./ProjectTag";
 import Button from "@mui/material/Button";
 import FacebookIcon from '@mui/icons-material/Facebook';
 import InstagramIcon from '@mui/icons-material/Instagram';
 import LinkIcon from '@mui/icons-material/Link';
 import X from "@mui/icons-material/X";
 
-interface ModalProps {
+interface ProjectModalProps {
     handleClose: VoidFunction;
     isOpen: boolean;
 }
 
 const categorySelection = ["Odpadové hospodářství", "Analýzy", "Zpravodajství", "Transformace"];
 
-function ProjectModal({handleClose, isOpen}: ModalProps) {
+function ProjectModal({handleClose, isOpen}: ProjectModalProps) {
 
     return (
         <Dialog open={isOpen} sx={{borderRadius: "20px"}}>
@@ -30,7 +30,7 @@ function ProjectModal({handleClose, isOpen}: ModalProps) {
                     flexWrap: "wrap",
                     alignItems: "center",
                 }}>
-                    {categorySelection.map((category, index) => (<SmallTag key={index} category={category}/>))}
+                    {categorySelection.map((category, index) => (<ProjectTag key={index} tag={category.name}/>))}
                 </Box>
                 <Box mt={2}>
                     <Typography>
