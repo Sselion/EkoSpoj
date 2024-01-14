@@ -2,13 +2,13 @@
 
 namespace EkoSpojTest4.Conteiners
 {
-    public class ContactData
+    public class ContactDTO
     {
         public string TypeName { get; set; }
         public string Value { get; set; }
         public string IconPath { get; set; }
 
-        public ContactData(Contact contact, ContactType cType)
+        public ContactDTO(Contact contact, ContactType cType)
         {
             TypeName = cType.Name;
             Value = contact.Value;

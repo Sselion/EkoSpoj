@@ -19,8 +19,8 @@ namespace Ekospoj.Controllers
         {
             List<Category> categories = dbContext.Categories.Where(x => x.Projects.Count > 0).ToList();
 
-            List<CategoryData> categoryData = new List<CategoryData>();
-            foreach (Category category in categories) { categoryData.Add( new CategoryData(category)); }
+            List<CategoryDTO> categoryData = new List<CategoryDTO>();
+            foreach (Category category in categories) { categoryData.Add( new CategoryDTO(category)); }
 
             return Ok(categoryData);
         }

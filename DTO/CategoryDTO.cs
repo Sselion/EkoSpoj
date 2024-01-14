@@ -2,11 +2,11 @@
 
 namespace EkoSpojTest4.Conteiners
 {
-    public class CategoryData
+    public class CategoryDTO
     {
         public string Name { get; set; }
         public string ShortName { get; set; }
-        public CategoryData(Category category)
+        public CategoryDTO(Category category)
         {
             Name = category.Name;
             ShortName = category.ShortName;

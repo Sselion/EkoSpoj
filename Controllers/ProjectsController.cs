@@ -20,9 +20,9 @@ namespace Ekospoj.Controllers
         public IActionResult GetAllProjects()
         {
             List<Project> projects = dbContext.Projects.ToList();
-            List<ProjectData> projectData = new List<ProjectData>();
+            List<ProjectDTO> projectData = new List<ProjectDTO>();
 
-            foreach(Project project in projects) { projectData.Add(new ProjectData(project)); }
+            foreach(Project project in projects) { projectData.Add(new ProjectDTO(project)); }
 
             return Ok(projectData);
         }

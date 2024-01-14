@@ -15,7 +15,7 @@ builder.Services.AddEndpointsApiExplorer();
 //string connStr = "Server=localhost;User ID=root;Password=toor;Database=ekospoj";
 
 builder.Services.AddDbContext<ProjectDbContext>(options =>
-        options.UseLazyLoadingProxies().UseMySql(connStr, ServerVersion.AutoDetect(connStr))
+        options.UseLazyLoadingProxies().UseMySql("ProjectConnectionString", ServerVersion.AutoDetect("ProjectConnectionString"))
     );
 var app = builder.Build();
 

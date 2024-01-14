@@ -2,15 +2,15 @@
 
 namespace EkoSpojTest4.Conteiners
 {
-    public class ProjectData
+    public class ProjectDTO
     {
         public string Name { get; set; }
         public string Description { get; set; }
         public List<string> TagsName { get; } = new List<string>();
         public List<string> CategoriesName { get;  } = new List<string>();
-        public List<ContactData> Contacts { get;  } = new List<ContactData>();
+        public List<ContactDTO> Contacts { get;  } = new List<ContactDTO>();
 
-        public ProjectData(Project project)
+        public ProjectDTO(Project project)
         {
             Name = project.Name;
             Description = project.Description;
@@ -39,7 +39,7 @@ namespace EkoSpojTest4.Conteiners
         {
             foreach (Contact contact in contacts)
             {
-                Contacts.Add(new ContactData(contact, contact.ContactType));
+                Contacts.Add(new ContactDTO(contact, contact.ContactType));
             }
         }
     }
