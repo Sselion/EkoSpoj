@@ -7,7 +7,7 @@ interface ProjectTagProps {
 function ProjectTag({tag}:ProjectTagProps) {
     return(
         <Box display="inline-block" sx={{
-            borderRadius: "20px",
+            borderRadius: "5px",
             color: "white",
             backgroundColor: "#83C089",
             p: 1,

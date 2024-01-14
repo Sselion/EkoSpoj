@@ -10,10 +10,10 @@ import ProjectTag from "./ProjectTag";
 import ProjectModal from "./ProjectModal";
 
 interface ProjectCardProps {
-    categories: Record<string, any>[],
+    project: Record<string, any>,
 }
 
-function ProjectCard({categories}: ProjectCardProps) {
+function ProjectCard({project}: ProjectCardProps) {
 
     const [open, setOpen] = useState(false);
 
@@ -34,18 +34,16 @@ function ProjectCard({categories}: ProjectCardProps) {
                 justifyContent: "center",
                 mb: 3,
             }}>
-                <CardMedia image="images/Life_Tree_Check_logo.png" sx={{height: 120}} title="Life Tree Check logo"/>
+                {/*{(<CardMedia image="images/Life_Tree_Check_logo.png" sx={{height: 120}} title="Life Tree Check logo"/>)}*/}
                 <CardContent>
                     <Typography variant="h5">
-                        LIFE Tree Check
+                        {project.name}
                     </Typography>
                     <Typography gutterBottom variant="body1" sx={{mt: 1}}>
-                        Pomáháme městům střední Evropy účinně čelit dopadům klimatické změny: zejména stále častějším
-                        vlnám
-                        veder a přehřívání měst.
+                        {project.description}
                     </Typography>
                     <Box sx={{flexDirection: 'row'}}>
-                        {categories.map((category, index) => (<ProjectTag key={index} tag={category.name}/>))}
+                        {project.categoriesName.map((tag: string) => (<ProjectTag key={tag} tag={tag}/>))}
                     </Box>
                 </CardContent>
                 <CardActions sx={{pb: 2, justifyContent: "center"}}>
@@ -66,7 +64,7 @@ function ProjectCard({categories}: ProjectCardProps) {
                     </Button>
                 </CardActions>
             </Card>
-            <ProjectModal handleClose={handleClose} isOpen={open}/>
+            <ProjectModal handleClose={handleClose} isOpen={open} project={project}/>
         </>
     )
 }

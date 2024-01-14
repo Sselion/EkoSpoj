@@ -5,7 +5,8 @@ import CategoryPage from "./components/CategoryPage";
 import "./styles.css"
 
 function App() {
-    const [data, setData] = useState<Record<string, any>[]>([]);
+    const [categoryData, setCategoryData] = useState<Record<string, any>[]>([]);
+    const [projectData, setProjectData] = useState<Record<string, any>[]>([]);
 
     useEffect(() => {
         fetch("https://ekospoj.cz/api/Categories", {
@@ -15,11 +16,26 @@ function App() {
                 if (!response.ok) {
                     throw new Error('Network response was not ok');
                 }
-
                 return response.json();
             })
             .then(json => {
-                setData(json);
+                setCategoryData(json);
+            })
+            .catch(error => {
+                window.alert(error);
+            });
+
+        fetch("https://ekospoj.cz/api/Projects", {
+            method: 'GET',
+        })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(json => {
+                setProjectData(json);
             })
             .catch(error => {
                 window.alert(error);
@@ -29,8 +45,8 @@ function App() {
     return (
         <Router>
             <Routes>
-                <Route path="/" element={<MainPage categories={data}/>}/>
-                <Route path="/category/:categoryName" element={<CategoryPage categories={data}/>}/>
+                <Route path="/" element={<MainPage categories={categoryData}/>}/>
+                <Route path="/category/:categoryName" element={<CategoryPage categories={categoryData} projects={projectData}/>}/>
             </Routes>
         </Router>
     );

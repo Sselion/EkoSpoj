@@ -12,17 +12,17 @@ import X from "@mui/icons-material/X";
 interface ProjectModalProps {
     handleClose: VoidFunction;
     isOpen: boolean;
+    project: Record<string, any>,
 }
 
-const categorySelection = ["Odpadové hospodářství", "Analýzy", "Zpravodajství", "Transformace"];
 
-function ProjectModal({handleClose, isOpen}: ProjectModalProps) {
+function ProjectModal({handleClose, isOpen, project}: ProjectModalProps) {
 
     return (
         <Dialog open={isOpen} sx={{borderRadius: "20px"}}>
             <Box p={3} px={5}>
                 <Typography variant="h2" sx={{textAlign: "center"}}>
-                    Název projektu
+                    {project.name}
                 </Typography>
                 <Box mt={1} sx={{
                     display: "flex", flexDirection: "row",
@@ -30,20 +30,18 @@ function ProjectModal({handleClose, isOpen}: ProjectModalProps) {
                     flexWrap: "wrap",
                     alignItems: "center",
                 }}>
-                    {categorySelection.map((category, index) => (<ProjectTag key={index} tag={category.name}/>))}
+                    {project.categoriesName.map((category: string) => (<ProjectTag key={category} tag={category}/>))}
                 </Box>
                 <Box mt={2}>
-                    <Typography>
-                        Tady budou odkazy na média
-                    </Typography>
+                    {project.contacts.map((contact: Record<string, any>, index:number) => (
+                        <a key={index} href={contact.value} target="_blank" rel="noopener noreferrer">
+                            <img src={contact.iconPath} alt={`${contact.typeName} icon`} />
+                        </a>
+                    ))}
                 </Box>
                 <Box mt={4} mb={3}>
                     <Typography variant="body1">
-                        Tady budou detailní nformace o projektu. Tady budou detailní nformace o projektu.Tady budou
-                        detailní nformace o projektu.Tady budou detailní nformace o projektu.Tady budou detailní
-                        nformace o projektu.Tady budou detailní nformace o projektu.Tady budou detailní nformace o
-                        projektu.Tady budou detailní nformace o projektu.Tady budou detailní nformace o projektu.Tady
-                        budou detailní nformace o projektu.Tady budou detailní nformace o projektu.
+                        {project.description}
                     </Typography>
                 </Box>
                 <Box sx={{display: "flex", justifyContent: "center"}}>

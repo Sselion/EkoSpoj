@@ -1,10 +1,10 @@
 import React from "react";
 import NavBar from "./NavBar";
-import Heading from "./Heading";
 import Grid from "@mui/material/Grid";
 import {Typography} from "@mui/material";
 import CategoryButton from "./CategoryButton";
 import Box from "@mui/material/Box";
+import Paper from "@mui/material/Paper";
 
 
 const name = "O nás";
@@ -20,7 +20,22 @@ function MainPage({categories}: MainPageProps) {
     return (
         <>
             <NavBar/>
-            <Heading name={name} about1={about1} about2={about2} size={10}/>
+            <Box sx={{p: 3, textAlign: "center", maxWidth: "70%", margin: '0 auto', mt: 10}}>
+                <Paper sx={{display: "flex", flexDirection: "column", py: 2, backgroundColor: "rgba(256, 256, 256, 0.5)"}}>
+                    <Typography variant="h3" >
+                        {name}
+                    </Typography>
+                    {about1 &&
+                        (<Typography variant="h6" px={{sm: 10, md: 25}} mt={2} sx={{whiteSpace: "pre-line"}}>
+                            {about1}
+                        </Typography>)
+                    }
+                    {about2 &&
+                        (<Typography variant="h6" px={{sm: 10, md: 25}}>
+                            {about2}
+                        </Typography>)}
+                </Paper>
+            </Box>
             <Box display="flex" sx={{p: 3, textAlign: "center", maxWidth: "900px", margin: '0 auto'}}>
                 <Grid container mt={0}>
                     <Grid item xs={12}>
