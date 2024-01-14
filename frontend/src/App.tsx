@@ -1,5 +1,5 @@
-import React, {useEffect, useState} from "react";
-import {BrowserRouter as Router, Route, Routes} from 'react-router-dom';
+import React, { useEffect, useState } from "react";
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import MainPage from "./components/MainPage";
 import CategoryPage from "./components/CategoryPage";
 import "./styles.css"
@@ -46,7 +46,8 @@ function App() {
         <Router>
             <Routes>
                 <Route path="/" element={<MainPage categories={categoryData}/>}/>
-                <Route path="/category/:categoryName" element={<CategoryPage categories={categoryData} projects={projectData}/>}/>
+                <Route path="/category/:categoryName"
+                       element={<CategoryPage categories={categoryData} projects={projectData}/>}/>
             </Routes>
         </Router>
     );

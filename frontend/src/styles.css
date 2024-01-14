@@ -7,3 +7,13 @@ html {
     height: 100%;
 }
 
+a, a:visited {
+    color: dimgrey;
+}
+a:hover {
+    color: black;
+}
+
+.icon-link {
+    margin: 0 5px;
+}

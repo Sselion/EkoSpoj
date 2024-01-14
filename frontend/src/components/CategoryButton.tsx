@@ -1,16 +1,13 @@
 import React from "react";
-import Button from '@mui/material/Button';
-import Typography from '@mui/material/Typography';
-import {Toolbar} from "@mui/material";
-import {Link} from "react-router-dom";
-
+import { Link } from "react-router-dom";
+import { Button, Typography, Toolbar } from "@mui/material";
 
 interface CategoryButtonProps {
     name: string,
     shortName: string,
 }
 
-function CategoryButton({name, shortName}: CategoryButtonProps) {
+function CategoryButton({ name, shortName }: CategoryButtonProps) {
     return (
         <Toolbar>
             <Link to={`/category/${shortName}`}>
@@ -30,7 +27,7 @@ function CategoryButton({name, shortName}: CategoryButtonProps) {
                         backgroundColor: "#e8ffe8"
                     }
                 }}>
-                    <Typography variant="h5" sx={{color: "black", textAlign: 'center'}}>
+                    <Typography variant="h5" sx={{ color: "black", textAlign: 'center' }}>
                         {name}
                     </Typography>
                 </Button>

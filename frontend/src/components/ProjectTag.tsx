@@ -1,20 +1,20 @@
 import React from "react";
-import Typography from '@mui/material/Typography';
-import Box from "@mui/material/Box";
+import { Typography, Box } from "@mui/material";
+
 interface ProjectTagProps {
     tag: string,
 }
-function ProjectTag({tag}:ProjectTagProps) {
-    return(
+
+function ProjectTag({ tag }: ProjectTagProps) {
+    return (
         <Box display="inline-block" sx={{
             borderRadius: "5px",
             color: "white",
             backgroundColor: "#83C089",
-            p: 1,
-            px: 2,
+            p: "2px 4px",
             boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px",
             ml: 1,
-            mt:1,
+            mt: 1,
         }}>
             <Typography variant="caption">
                 {tag}

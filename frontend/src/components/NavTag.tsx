@@ -1,14 +1,12 @@
 import React from "react";
-import Button from "@mui/material/Button";
-import Typography from '@mui/material/Typography';
-import {Link} from "react-router-dom";
-
+import { Link } from "react-router-dom";
+import { Typography, Button } from "@mui/material";
 
 interface NavTagProps {
     category: Record<string, any>,
 }
 
-function NavTag({category}: NavTagProps) {
+function NavTag({ category }: NavTagProps) {
     return (
         <Link to={`/category/${category.shortName}`}>
             <Button sx={{

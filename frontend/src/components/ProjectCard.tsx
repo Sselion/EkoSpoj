@@ -1,11 +1,6 @@
-import React, {useState} from "react";
-import Card from '@mui/material/Card';
-import CardActions from '@mui/material/CardActions';
-import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
-import {Typography} from "@mui/material";
-import Button from "@mui/material/Button";
-import Box from "@mui/material/Box";
+import React, { useState } from "react";
+import { Typography, Box, Button, Card, CardActions, CardContent, CardMedia } from "@mui/material";
+
 import ProjectTag from "./ProjectTag";
 import ProjectModal from "./ProjectModal";
 
@@ -13,8 +8,7 @@ interface ProjectCardProps {
     project: Record<string, any>,
 }
 
-function ProjectCard({project}: ProjectCardProps) {
-
+function ProjectCard({ project }: ProjectCardProps) {
     const [open, setOpen] = useState(false);
 
     const handleClose = () => {
@@ -24,7 +18,6 @@ function ProjectCard({project}: ProjectCardProps) {
     const handleOpen = () => {
         setOpen(true);
     };
-
 
     return (
         <>
@@ -39,14 +32,14 @@ function ProjectCard({project}: ProjectCardProps) {
                     <Typography variant="h5">
                         {project.name}
                     </Typography>
-                    <Typography gutterBottom variant="body1" sx={{mt: 1}}>
+                    <Typography gutterBottom variant="body1" sx={{ mt: 1 }}>
                         {project.description}
                     </Typography>
-                    <Box sx={{flexDirection: 'row'}}>
+                    <Box sx={{ flexDirection: 'row' }}>
                         {project.categoriesName.map((tag: string) => (<ProjectTag key={tag} tag={tag}/>))}
                     </Box>
                 </CardContent>
-                <CardActions sx={{pb: 2, justifyContent: "center"}}>
+                <CardActions sx={{ pb: 2, justifyContent: "center" }}>
                     <Button sx={{
                         borderRadius: "20px",
                         color: "#297229",

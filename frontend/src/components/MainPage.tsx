@@ -1,15 +1,11 @@
 import React from "react";
 import NavBar from "./NavBar";
-import Grid from "@mui/material/Grid";
-import {Typography} from "@mui/material";
 import CategoryButton from "./CategoryButton";
-import Box from "@mui/material/Box";
-import Paper from "@mui/material/Paper";
-
+import {Typography, Grid, Box, Paper} from "@mui/material";
 
 const name = "O nás";
 const about1 = "Vítejte na EkoSpoji! Zde naleznete všechny informace o ekologických projektech v České republice. Jsme spojovacím prvkem mezi těmi, kdo se snaží o pozitivní změnu a těmi, kdo chtějí tuto změnu podporovat."
-const about2 ="Naše platforma je navržena tak, aby vám usnadnila objevování ekologických projektů, které vám jsou blízké. Věříme, že společně můžeme tvořit pozitivní dopad na životní " +
+const about2 = "Naše platforma je navržena tak, aby vám usnadnila objevování ekologických projektů, které vám jsou blízké. Věříme, že společně můžeme tvořit pozitivní dopad na životní " +
     "prostředí a posouvat ekologické myšlení na novou úroveň."
 
 interface MainPageProps {
@@ -21,8 +17,9 @@ function MainPage({categories}: MainPageProps) {
         <>
             <NavBar/>
             <Box sx={{p: 3, textAlign: "center", maxWidth: "70%", margin: '0 auto', mt: 10}}>
-                <Paper sx={{display: "flex", flexDirection: "column", py: 2, backgroundColor: "rgba(256, 256, 256, 0.5)"}}>
-                    <Typography variant="h3" >
+                <Paper
+                    sx={{display: "flex", flexDirection: "column", py: 2, backgroundColor: "rgba(256, 256, 256, 0.5)"}}>
+                    <Typography variant="h3">
                         {name}
                     </Typography>
                     {about1 &&
@@ -44,7 +41,8 @@ function MainPage({categories}: MainPageProps) {
                         </Typography>
                     </Grid>
                     {categories.map((category, index) => (
-                            <Grid key={category.shortName} item xs={12} sm={6} md={4} justifyContent="center" alignItems="center" sx={{display: "flex"}}>
+                            <Grid key={category.shortName} item xs={12} sm={6} md={4} justifyContent="center"
+                                  alignItems="center" sx={{display: "flex"}}>
                                 <CategoryButton key={index} name={category.name} shortName={category.shortName}/>
                             </Grid>
                         )
@@ -52,7 +50,6 @@ function MainPage({categories}: MainPageProps) {
                 </Grid>
             </Box>
         </>
-
     )
 }
 
