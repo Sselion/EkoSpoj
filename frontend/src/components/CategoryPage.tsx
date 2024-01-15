@@ -3,7 +3,7 @@ import NavBar from "./NavBar";
 import NavTag from "./NavTag";
 import ProjectCard from "./ProjectCard";
 import { useParams } from "react-router-dom";
-import { Typography, Grid, Box } from "@mui/material";
+import { Typography, Grid, Box, Skeleton } from "@mui/material";
 
 interface CategoryPageProps {
     categories: Record<string, any>[],
@@ -20,11 +20,18 @@ function CategoryPage({ categories, projects }: CategoryPageProps) {
             <NavBar/>
             <Box sx={{ display: "flex", flexDirection: 'row', mt: 11 }}>
                 <Grid container spacing={1} sx={{ justifyContent: 'center' }}>
-                    {categories.map((category, index) => (
-                        <Grid key={category.shortName} item>
-                            <NavTag category={category}/>
+                    {categories.length > 0 ? (
+                        categories.map((category, index) => (
+                            <Grid key={category.shortName} item>
+                                <NavTag category={category}/>
+                            </Grid>
+                        ))
+                    ) : (
+                        <Grid container item xs={12} sx={{ justifyContent: 'center' }}>
+                            <Skeleton variant="rounded" height={50}
+                                      sx={{ borderRadius: "20px", width: "65%", height: "36px" }}/>
                         </Grid>
-                    ))}
+                    )}
                 </Grid>
             </Box>
             <Box sx={{
