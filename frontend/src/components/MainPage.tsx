@@ -4,9 +4,8 @@ import CategoryButton from "./CategoryButton";
 import { Typography, Grid, Box, Paper, Skeleton } from "@mui/material";
 
 const name = "O nás";
-const about1 = "Vítejte na EkoSpoji! Zde naleznete všechny informace o ekologických projektech v České republice. Jsme spojovacím prvkem mezi těmi, kdo se snaží o pozitivní změnu a těmi, kdo chtějí tuto změnu podporovat."
-const about2 = "Naše platforma je navržena tak, aby vám usnadnila objevování ekologických projektů, které vám jsou blízké. Věříme, že společně můžeme tvořit pozitivní dopad na životní " +
-    "prostředí a posouvat ekologické myšlení na novou úroveň."
+const about1 = "Vítejte v našem katalogu ekologických projektů, kde můžete objevit iniciativy, které jsou vám sympatické. Projděte si jednotlivé kategorie a objevujte, co se v Česku děje pro ochranu krajiny a zelenou transformaci."
+
 
 const skeletons = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
@@ -18,7 +17,7 @@ function MainPage({ categories }: MainPageProps) {
     return (
         <>
             <NavBar/>
-            <Box sx={{ p: 3, textAlign: "center", maxWidth: "70%", margin: '0 auto', mt: 10 }}>
+            <Box sx={{ p: 3, textAlign: "center", maxWidth: "900px", margin: '0 auto', mt: 10 }}>
                 <Paper
                     sx={{
                         display: "flex",
@@ -30,14 +29,10 @@ function MainPage({ categories }: MainPageProps) {
                         {name}
                     </Typography>
                     {about1 &&
-                        (<Typography variant="h6" px={{ sm: 10, md: 25 }} mt={2} sx={{ whiteSpace: "pre-line" }}>
+                        (<Typography variant="h6" px="5%" mt={2} sx={{ whiteSpace: "pre-line" }}>
                             {about1}
                         </Typography>)
                     }
-                    {about2 &&
-                        (<Typography variant="h6" px={{ sm: 10, md: 25 }}>
-                            {about2}
-                        </Typography>)}
                 </Paper>
             </Box>
             <Box display="flex" sx={{ p: 3, textAlign: "center", maxWidth: "900px", margin: '0 auto' }}>

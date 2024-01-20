@@ -12,10 +12,17 @@ function NavBar() {
     return (
         <AppBar sx={{ backgroundColor: "white" }}>
             <Box ml={5} mr={5}>
-                <Toolbar>
-                    <Typography variant="h4" sx={{ flexGrow: 1, color: "#2B6048" }}>
-                        EkoSpoj
-                    </Typography>
+                <Toolbar sx={{justifyContent: "space-between"}}>
+                    <Button onClick={handleButtonClick} sx={{
+                        color: "#2B6048",
+                        "&:hover": {
+                            backgroundColor: "white",
+                        }
+                    }}>
+                        <Typography variant="h4" sx={{ flexGrow: 1, color: "#2B6048" }}>
+                            EkoSpoj
+                        </Typography>
+                    </Button>
                     <Button onClick={handleButtonClick}
                             sx={{
                                 color: "#2B6048",

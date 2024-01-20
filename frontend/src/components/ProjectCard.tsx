@@ -49,9 +49,8 @@ function ProjectCard({ project }: ProjectCardProps) {
                     <Box sx={{ display: "flex", flexDirection: 'row', alignItems: "left", pt: 1, pl: 1 }}>
                         {project.tagsName.map((tag: string) => (<ProjectTag key={tag} tag={tag}/>))}
                     </Box>
-                    {/*<CardMedia image="/images/Life_Tree_Check_logo.png" sx={{ height: 120 }}*/}
-                    {/*           title="Life Tree Check logo"/>*/}
-                    {project.projectLogoPath && (<CardMedia image={`${project.projectLogoPath}`} sx={{height: 120}} title="Life Tree Check logo"/>)}
+
+                    {project.projectLogoPath && (<CardMedia image={`${project.projectLogoPath}`} sx={{height: 120}} title={`${project.name} logo`}/>)}
                     <CardContent>
                         <Typography variant="h5" ref={titleRef}>
                             {project.name}

@@ -17,3 +17,7 @@ a:hover {
 .icon-link {
     margin: 0 5px;
 }
+
+.custom-icon:hover {
+    fill: black;
+}
