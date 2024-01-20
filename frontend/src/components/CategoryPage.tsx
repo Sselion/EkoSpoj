@@ -13,7 +13,7 @@ interface CategoryPageProps {
 function CategoryPage({ categories, projects }: CategoryPageProps) {
     const { categoryName } = useParams();
     const foundCategory = categories.find(({ shortName }) => shortName === categoryName);
-    const categoryProjects = projects.filter(project => project.tagsName.includes(foundCategory?.shortName));
+    const categoryProjects = projects.filter(project => project.categoriesName.includes(foundCategory?.shortName));
 
     return (
         <>
