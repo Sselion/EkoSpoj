@@ -60,7 +60,7 @@ function CategoryPage({ categories, projects }: CategoryPageProps) {
                  sx={{ p: 3, textAlign: "center", maxWidth: "70%", margin: '0 auto', mt: 0, flexDirection: 'column' }}>
                 <Box sx={{ display: "flex", textAlign: "center" }}>
                     <Grid container spacing={1} sx={{ justifyContent: "center" }}>
-                        {projects.length < 0 ? (
+                        {projects.length > 0 ? (
                             categoryProjects.map((project, index) => (
                                 <Grid key={index} item xs={12} md={6} lg={4} xl={3} justifyContent="center"
                                       alignItems="center"
