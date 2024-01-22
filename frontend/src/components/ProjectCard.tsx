@@ -15,15 +15,15 @@ function ProjectCard({ project }: ProjectCardProps) {
 
     useEffect(() => {
         const element: any = titleRef?.current;
-        if(element) {
-           const titleHeight = element.clientHeight;
-           if (titleHeight > 65) {
-               setLines(5);
-           } else if (titleHeight > 33) {
-               setLines(6);
-           } else {
-               setLines(7)
-           }
+        if (element) {
+            const titleHeight = element.clientHeight;
+            if (titleHeight > 65) {
+                setLines(5);
+            } else if (titleHeight > 33) {
+                setLines(6);
+            } else {
+                setLines(7)
+            }
         }
     }, [project.name]);
 
@@ -44,13 +44,20 @@ function ProjectCard({ project }: ProjectCardProps) {
                 display: "flex", flexDirection: 'column',
                 justifyContent: "space-between",
                 mb: 3,
+                px: 1,
             }}>
                 <Box sx={{ height: "410px" }}>
-                    <Box sx={{ display: "flex", flexDirection: 'row', alignItems: "left", pt: 1, pl: 1 }}>
+                    <Box sx={{ display: "flex", flexDirection: 'row', alignItems: "left", pb: 1 }}>
                         {project.tagsName.map((tag: string) => (<ProjectTag key={tag} tag={tag}/>))}
                     </Box>
-
-                    {project.projectLogoPath && (<CardMedia image={`${project.projectLogoPath}`} sx={{height: 120}} title={`${project.name} logo`}/>)}
+                    {project.projectLogoPath && (<CardMedia className="card-media-img" sx={{
+                        height: 120,
+                        width: "100%",
+                        backgroundImage: `url(${project.projectLogoPath})`,
+                        backgroundSize: "contain"
+                    }} title={`${project.name} logo`}>
+                        <></>
+                    </CardMedia>)}
                     <CardContent>
                         <Typography variant="h5" ref={titleRef}>
                             {project.name}

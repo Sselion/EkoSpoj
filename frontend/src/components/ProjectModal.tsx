@@ -39,7 +39,7 @@ function ProjectModal({ handleClose, isOpen, project }: ProjectModalProps) {
                     justifyContent: "flex-start",
                     flexWrap: "wrap",
                 }}>
-                    {project.categoriesName.map((category: string) => (
+                    {project.tagsName.map((category: string) => (
                         <ProjectTag key={category} tag={category}/>
                     ))}
                 </Box>
@@ -61,7 +61,7 @@ function ProjectModal({ handleClose, isOpen, project }: ProjectModalProps) {
                     ))}
                 </Box>
                 <Box mt={2} mb={3}>
-                    <Typography variant="body1">
+                    <Typography variant="body1" style={{ textAlign: 'justify' }}>
                         {project.description}
                     </Typography>
                 </Box>

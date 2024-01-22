@@ -13,7 +13,7 @@ function ProjectTag({ tag }: ProjectTagProps) {
             backgroundColor: "#83C089",
             p: "2px 4px",
             boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px",
-            ml: 1,
+            mr: 1,
             mt: 1,
         }}>
             <Typography variant="caption">
