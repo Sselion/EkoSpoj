@@ -1,8 +1,8 @@
-import React from "react";
+import React, { useEffect } from "react";
 import NavBar from "./NavBar";
 import NavTag from "./NavTag";
 import ProjectCard from "./ProjectCard";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";
 import { Typography, Grid, Box, Skeleton } from "@mui/material";
 
 interface CategoryPageProps {
@@ -14,6 +14,15 @@ function CategoryPage({ categories, projects }: CategoryPageProps) {
     const { categoryName } = useParams();
     const foundCategory = categories.find(({ shortName }) => shortName === categoryName);
     const categoryProjects = projects.filter(project => project.categoriesName.includes(foundCategory?.shortName));
+    const navigate = useNavigate();
+
+    const categoryExists = categories.some(category => category.shortName === categoryName);
+
+    useEffect(() => {
+        if (!categoryExists) {
+            navigate('/404');
+        }
+    }, [categoryExists, navigate]);
 
     return (
         <>

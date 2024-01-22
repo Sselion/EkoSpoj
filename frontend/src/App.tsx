@@ -37,7 +37,7 @@ function App() {
             })
             .then(json => {
                 setProjectData(json);
-                console.log(json);
+                // console.log(json);
             })
             .catch(error => {
                 window.alert(error);
