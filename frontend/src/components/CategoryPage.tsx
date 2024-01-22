@@ -19,10 +19,10 @@ function CategoryPage({ categories, projects }: CategoryPageProps) {
     const categoryExists = categories.some(category => category.shortName === categoryName);
 
     useEffect(() => {
-        if (!categoryExists) {
+        if (categories.length > 0 && !categoryExists) {
             navigate('/404');
         }
-    }, [categoryExists, navigate]);
+    }, [categoryExists, navigate, categories]);
 
     return (
         <>
@@ -60,7 +60,7 @@ function CategoryPage({ categories, projects }: CategoryPageProps) {
                  sx={{ p: 3, textAlign: "center", maxWidth: "70%", margin: '0 auto', mt: 0, flexDirection: 'column' }}>
                 <Box sx={{ display: "flex", textAlign: "center" }}>
                     <Grid container spacing={1} sx={{ justifyContent: "center" }}>
-                        {categoryProjects ? (
+                        {projects.length < 0 ? (
                             categoryProjects.map((project, index) => (
                                 <Grid key={index} item xs={12} md={6} lg={4} xl={3} justifyContent="center"
                                       alignItems="center"
@@ -69,10 +69,10 @@ function CategoryPage({ categories, projects }: CategoryPageProps) {
                                 </Grid>))
                         ) : (
                             <>
-                                <Skeleton variant="rounded" sx={{ width: "280px", height: "250px", mr: 2 }}/>
-                                <Skeleton variant="rounded" sx={{ width: "280px", height: "250px", mr: 2 }}/>
-                                <Skeleton variant="rounded" sx={{ width: "280px", height: "250px", mr: 2 }}/>
-                                <Skeleton variant="rounded" sx={{ width: "280px", height: "250px", mr: 2 }}/>
+                                <Skeleton variant="rounded" sx={{ width: "296px", height: "470px", mr: 2 }}/>
+                                <Skeleton variant="rounded" sx={{ width: "296px", height: "470px", mr: 2 }}/>
+                                <Skeleton variant="rounded" sx={{ width: "296px", height: "470px", mr: 2 }}/>
+                                <Skeleton variant="rounded" sx={{ width: "296px", height: "470px", mr: 2 }}/>
                             </>
                         )
                         }
