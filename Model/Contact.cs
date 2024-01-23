@@ -2,12 +2,13 @@
 {
     public class Contact
     {
-        public Guid Id { get; set; }
+        public long Id { get; set; }
         public string Value { get; set; }
 
         // Navigation properties
-        public virtual List<Project> Projects { get; set; }
-        public Guid ContactTypeId { get; set; }
+        public long ProjectId { get; set; }
+        public virtual Project Project { get; set; }
+        public long ContactTypeId { get; set; }
         public virtual ContactType ContactType { get; set; }
     }
 }

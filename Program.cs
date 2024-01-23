@@ -8,14 +8,14 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 
 builder.Services.AddControllers();
-builder.Services.AddControllers().AddJsonOptions(x =>
-x.JsonSerializerOptions.ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.IgnoreCycles);
-builder.Services.AddEndpointsApiExplorer(); 
+//builder.Services.AddControllers().AddJsonOptions(x =>
+//x.JsonSerializerOptions.ReferenceHandler = System.Text.Json.Serialization.ReferenceHandler.IgnoreCycles);
+builder.Services.AddEndpointsApiExplorer();
 
-//string connStr = "Server=localhost;User ID=root;Password=toor;Database=ekospoj";
+string connStr = "Server=localhost;User ID=root;Password=toor;Database=ekospoj";
 
 builder.Services.AddDbContext<ProjectDbContext>(options =>
-        options.UseLazyLoadingProxies().UseMySql("ProjectConnectionString", ServerVersion.AutoDetect("ProjectConnectionString"))
+        options.UseLazyLoadingProxies().UseMySql(connStr, ServerVersion.AutoDetect(connStr))
     );
 var app = builder.Build();
 
@@ -27,8 +27,9 @@ app.UseCors(builder => builder
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
+    app.UseExceptionHandler("/Home/Error");
     // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-    app.UseHsts();
+    //app.UseHsts();
 }
 
 app.UseHttpsRedirection();
@@ -37,7 +38,7 @@ app.UseRouting();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller}/{action=Index}/{id?}");
+    pattern: "{controller=Home}/{action=Index}/{id?}");
 
 app.MapFallbackToFile("index.html");
 
