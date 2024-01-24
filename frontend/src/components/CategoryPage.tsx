@@ -62,7 +62,7 @@ function CategoryPage({ categories, projects }: CategoryPageProps) {
                     <Grid container spacing={1} sx={{ justifyContent: "center" }}>
                         {projects.length > 0 ? (
                             categoryProjects.map((project, index) => (
-                                <Grid key={index} item xs={12} md={6} lg={4} xl={3} justifyContent="center"
+                                <Grid key={project.name} item xs={12} md={6} lg={4} xl={3} justifyContent="center"
                                       alignItems="center"
                                       sx={{ display: "flex" }}>
                                     <ProjectCard project={project}/>

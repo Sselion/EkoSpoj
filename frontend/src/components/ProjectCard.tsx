@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { Typography, Box, Button, Card, CardActions, CardContent, CardMedia } from "@mui/material";
+import { Typography, Box, Button, Card, CardActions, CardContent, CardMedia, Tooltip } from "@mui/material";
 
 import ProjectTag from "./ProjectTag";
 import ProjectModal from "./ProjectModal";
@@ -11,7 +11,9 @@ interface ProjectCardProps {
 function ProjectCard({ project }: ProjectCardProps) {
     const [open, setOpen] = useState(false);
     const [lines, setLines] = useState(7);
+    const [isOverflowing, setIsOverflowing] = useState<boolean>(false);
     const titleRef = useRef(null);
+    const descriptionRef = useRef(null);
 
     useEffect(() => {
         const element: any = titleRef?.current;
@@ -27,6 +29,17 @@ function ProjectCard({ project }: ProjectCardProps) {
         }
     }, [project.name]);
 
+    useEffect(() => {
+        const element: any = descriptionRef?.current;
+
+        if (element) {
+            const clientHeight = element.clientHeight;
+            const scrollHeight = element.scrollHeight;
+            console.log(clientHeight, scrollHeight, project.name)
+            setIsOverflowing(clientHeight < scrollHeight);
+        }
+    }, [project.shortDescription, lines]);
+
     const handleClose = () => {
         setOpen(false);
     };
@@ -34,6 +47,12 @@ function ProjectCard({ project }: ProjectCardProps) {
     const handleOpen = () => {
         setOpen(true);
     };
+
+    const tooltipTitle = (
+        <Typography variant="body2">
+            {project.shortDescription}
+        </Typography>
+    )
 
     return (
         <>
@@ -62,18 +81,36 @@ function ProjectCard({ project }: ProjectCardProps) {
                         <Typography variant="h5" ref={titleRef}>
                             {project.name}
                         </Typography>
-                        <Typography gutterBottom variant="body1" sx={{
-                            display: "-webkit-box",
-                            WebkitBoxOrient: "vertical",
-                            mt: 1,
-                            maxHeight: "168px",
-                            overflow: "hidden",
-                            textOverflow: "ellipsis",
-                            overflowWrap: "anywhere",
-                            WebkitLineClamp: lines,
-                        }}>
-                            {project.shortDescription}
-                        </Typography>
+                        {isOverflowing &&
+                            <Tooltip title={tooltipTitle} placement="right">
+                                <Typography gutterBottom ref={descriptionRef} variant="body1" sx={{
+                                    display: "-webkit-box",
+                                    WebkitBoxOrient: "vertical",
+                                    mt: 1,
+                                    maxHeight: "168px",
+                                    overflow: "hidden",
+                                    textOverflow: "ellipsis",
+                                    overflowWrap: "anywhere",
+                                    WebkitLineClamp: lines,
+                                }}>
+                                    {project.shortDescription}
+                                </Typography>
+                            </Tooltip>
+                        }
+                        {!isOverflowing &&
+                            <Typography gutterBottom ref={descriptionRef} variant="body1" sx={{
+                                display: "-webkit-box",
+                                WebkitBoxOrient: "vertical",
+                                mt: 1,
+                                maxHeight: "168px",
+                                overflow: "hidden",
+                                textOverflow: "ellipsis",
+                                overflowWrap: "anywhere",
+                                WebkitLineClamp: lines,
+                            }}>
+                                {project.shortDescription}
+                            </Typography>
+                        }
                     </CardContent>
                 </Box>
                 <CardActions sx={{ pb: 2, justifyContent: "center" }}>
