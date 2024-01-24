@@ -2,7 +2,7 @@
 
 public class ContactType
 {
-    public Guid Id { get; set; }
+    public long Id { get; set; }
     public string Name { get; set; }
     //public string Type { get; set; }
     public string IconPath { get; set; }

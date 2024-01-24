@@ -235,3 +235,6 @@ _Pvt_Extensions
 
 # Intellij IDEA
 .idea
+/Migrations
+/Controllers/ReadCsvController.cs
+/Controllers/CreateControler.cs
