@@ -31,6 +31,7 @@ function App() {
 
         fetch("https://ekospoj.cz/api/Projects", {
             method: 'GET',
+
         })
             .then(response => {
                 if (!response.ok) {
