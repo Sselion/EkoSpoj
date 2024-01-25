@@ -12,7 +12,6 @@ function ErrorPage() {
 
     return (
         <Box>
-            <NavBar />
             <Box sx={{display: "flex", flexDirection: "column" ,justifyContent: "center", alignItems: "center", mt: "12%"}}>
                 <Typography variant="h2">
                     Stránka nenalezena

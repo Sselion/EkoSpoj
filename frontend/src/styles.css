@@ -5,6 +5,20 @@ html {
     background-position: right;
     background-size: contain;
     height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+    position: relative;
+    &::after{
+        content: '';
+        display: block;
+        height: 50px;
+    }
 }
 
 a, a:visited {
@@ -21,4 +35,3 @@ a:hover {
 .custom-icon:hover {
     fill: black;
 }
-

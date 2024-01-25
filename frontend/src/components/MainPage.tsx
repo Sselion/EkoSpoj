@@ -2,6 +2,7 @@ import React from "react";
 import NavBar from "./NavBar";
 import CategoryButton from "./CategoryButton";
 import { Typography, Grid, Box, Paper, Skeleton } from "@mui/material";
+import Footer from "./Footer";
 
 const name = "O nás";
 const about1 = "Vítejte v našem katalogu ekologických projektů, kde můžete objevit iniciativy, které jsou vám sympatické. Projděte si jednotlivé kategorie a objevujte, co se v Česku děje pro ochranu krajiny a zelenou transformaci."
@@ -16,7 +17,6 @@ interface MainPageProps {
 function MainPage({ categories }: MainPageProps) {
     return (
         <>
-            <NavBar/>
             <Box sx={{ p: 3, textAlign: "center", maxWidth: "900px", margin: '0 auto', mt: 10 }}>
                 <Paper
                     sx={{

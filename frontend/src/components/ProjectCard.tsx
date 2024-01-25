@@ -82,7 +82,7 @@ function ProjectCard({ project }: ProjectCardProps) {
                             {project.name}
                         </Typography>
                         {isOverflowing &&
-                            <Tooltip title={tooltipTitle} placement="right">
+                            <Tooltip title={tooltipTitle} placement="bottom">
                                 <Typography gutterBottom ref={descriptionRef} variant="body1" sx={{
                                     display: "-webkit-box",
                                     WebkitBoxOrient: "vertical",

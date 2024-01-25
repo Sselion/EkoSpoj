@@ -2,8 +2,11 @@ import React, { useEffect, useState } from "react";
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import MainPage from "./components/MainPage";
 import CategoryPage from "./components/CategoryPage";
+import ContactPage from "./components/ContactPage";
 import "./styles.css"
 import ErrorPage from "./components/ErrorPage";
+import Footer from "./components/Footer";
+import NavBar from "./components/NavBar";
 
 function App() {
     const [categoryData, setCategoryData] = useState<Record<string, any>[]>([]);
@@ -46,12 +49,15 @@ function App() {
 
     return (
         <Router>
+            <NavBar />
             <Routes>
                 <Route path="/" element={<MainPage categories={categoryData}/>}/>
                 <Route path="/category/:categoryName"
                        element={<CategoryPage categories={categoryData} projects={projectData}/>}/>
+                <Route path="/contact" element={<ContactPage />} />
                 <Route path="*" element={<ErrorPage />} />
             </Routes>
+            <Footer />
         </Router>
     );
 }

@@ -26,7 +26,6 @@ function CategoryPage({ categories, projects }: CategoryPageProps) {
 
     return (
         <>
-            <NavBar/>
             <Box sx={{ display: "flex", flexDirection: 'row', mt: 11 }}>
                 <Grid container spacing={1} sx={{ justifyContent: 'center' }}>
                     {categories.length > 0 ? (
