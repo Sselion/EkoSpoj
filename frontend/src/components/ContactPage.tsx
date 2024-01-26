@@ -28,9 +28,8 @@ function ContactPage() {
         }))
     };
 
-    // TODO POST request na BE
-    const handleSubmit = (event: React.FormEvent) => {
-        event.preventDefault();
+    const handleSubmit = (e: React.FormEvent) => {
+        e.preventDefault();
 
         fetch("https://ekospoj.cz/api/MessageSend", {
             method: 'POST',
@@ -114,7 +113,10 @@ function ContactPage() {
                         sx={{
                             mt: 2,
                             backgroundColor: "#83C089",
-                            color: "white"
+                            color: "white",
+                            "&:hover": {
+                                backgroundColor: "#83C089"
+                            }
                         }}
                 >
                     <Typography variant="subtitle1" display="block">

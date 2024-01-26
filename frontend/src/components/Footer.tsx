@@ -8,14 +8,14 @@ function Footer() {
         <>
             <AppBar sx={{
                 position: 'absolute',
-                backgroundColor: "#2B6048",
+                backgroundColor: "white",
                 bottom: 0,
-                height: '50px',
+                height: '45px',
                 justifyContent: 'center',
                 top: 'auto'
             }}>
-                <Toolbar disableGutters sx={{ justifyContent: 'center', minHeight: '50px !important'}}>
-                    <Typography variant="h6" sx={{ color: 'white' }}>EkoSpoj {year}</Typography>
+                <Toolbar disableGutters sx={{ justifyContent: 'center', minHeight: '45px !important'}}>
+                    <Typography sx={{ color: '#2B6048', fontSize: '1.2rem' }}>EkoSpoj {year}</Typography>
                 </Toolbar>
             </AppBar>
 

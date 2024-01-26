@@ -1,5 +1,5 @@
 import React from "react";
-import { Typography, Box, Dialog, Button } from "@mui/material";
+import { Typography, Box, Dialog, Button, Tooltip } from "@mui/material";
 import FacebookIcon from '@mui/icons-material/Facebook';
 import InstagramIcon from '@mui/icons-material/Instagram';
 import X from "@mui/icons-material/X";
@@ -48,16 +48,18 @@ function ProjectModal({ handleClose, isOpen, project }: ProjectModalProps) {
                 </Typography>
                 <Box mt={2} sx={{ display: "flex", justifyContent: "center" }}>
                     {project.contacts.map((contact: Record<string, any>, index: number) => (
-                        <a key={index} href={contact.value} target="_blank" rel="noopener noreferrer"
-                           className="icon-link">
-                            {contact.typeName === "Web" && <LanguageIcon/>}
-                            {contact.typeName === "Facebook" && <FacebookIcon/>}
-                            {contact.typeName === "YouTube" && <YouTubeIcon/>}
-                            {contact.typeName === "Instagram" && <InstagramIcon/>}
-                            {(contact.typeName === "Twitter" || contact.typeName === "X") && <X/>}
-                            {contact.typeName === "LinkedIn" && <LinkedInIcon/>}
-                            {contact.typeName === "TikTok" && <TikTokIcon/>}
-                        </a>
+                        <Tooltip title={contact.typeName}>
+                            <a key={index} href={contact.value} target="_blank" rel="noopener noreferrer"
+                               className="icon-link">
+                                {contact.typeName === "Web" && <LanguageIcon/>}
+                                {contact.typeName === "Facebook" && <FacebookIcon/>}
+                                {contact.typeName === "YouTube" && <YouTubeIcon/>}
+                                {contact.typeName === "Instagram" && <InstagramIcon/>}
+                                {(contact.typeName === "Twitter" || contact.typeName === "X") && <X/>}
+                                {contact.typeName === "LinkedIn" && <LinkedInIcon/>}
+                                {contact.typeName === "TikTok" && <TikTokIcon/>}
+                            </a>
+                        </Tooltip>
                     ))}
                 </Box>
                 <Box mt={2} mb={3}>

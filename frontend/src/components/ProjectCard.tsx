@@ -35,7 +35,7 @@ function ProjectCard({ project }: ProjectCardProps) {
         if (element) {
             const clientHeight = element.clientHeight;
             const scrollHeight = element.scrollHeight;
-            console.log(clientHeight, scrollHeight, project.name)
+
             setIsOverflowing(clientHeight < scrollHeight);
         }
     }, [project.shortDescription, lines]);

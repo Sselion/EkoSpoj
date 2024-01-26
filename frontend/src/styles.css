@@ -4,21 +4,22 @@ html {
     background-repeat: no-repeat;
     background-position: right;
     background-size: contain;
-    height: 100%;
     margin: 0;
     padding: 0;
-}
-
-body {
     min-height: 100vh;
-    margin: 0;
-    padding: 0;
     position: relative;
     &::after{
         content: '';
         display: block;
-        height: 50px;
+        height: 45px;
     }
+}
+
+body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
 }
 
 a, a:visited {

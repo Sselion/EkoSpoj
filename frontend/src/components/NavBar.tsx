@@ -61,8 +61,7 @@ function NavBar() {
                                                 sx={{
                                                     color: "#2B6048",
                                                     "&:hover": {
-                                                        backgroundColor: "#83C089",
-                                                        color: "white"
+                                                        backgroundColor: "transparent"
                                                     }
                                                 }}
                                         >
@@ -76,8 +75,7 @@ function NavBar() {
                                                 sx={{
                                                     color: "#2B6048",
                                                     "&:hover": {
-                                                        backgroundColor: "#83C089",
-                                                        color: "white"
+                                                        backgroundColor: "transparent"
                                                     }
                                                 }}
                                         >
@@ -90,7 +88,7 @@ function NavBar() {
                             </>
                         )
                         : (
-                            <div>
+                            <Box gap={1} sx={{display: 'flex'}}>
                                 <Button onClick={handleContactClick}
                                         sx={{
                                             color: "#2B6048",
@@ -117,7 +115,7 @@ function NavBar() {
                                         Rozcestník
                                     </Typography>
                                 </Button>
-                            </div>)
+                            </Box>)
                     }
                 </Toolbar>
             </Box>
