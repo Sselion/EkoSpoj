@@ -1,13 +1,9 @@
 import React, { useState } from "react";
 import { Box, Button, Stack, TextField, Typography } from "@mui/material";
+import { FormData, LoginFormProps } from "./types";
 
 
-interface FormData {
-    name: string;
-    password: string;
-}
-
-function LoginForm() {
+function LoginForm({handleLogin}: LoginFormProps) {
     const [formData, setFormData] = useState<FormData>({
         name: "",
         password: ""
