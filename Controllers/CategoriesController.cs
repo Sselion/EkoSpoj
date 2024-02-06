@@ -1,5 +1,5 @@
 ﻿using Ekospoj.Data;
-using EkoSpojTest4.Conteiners;
+using Ekospoj.Model;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Ekospoj.Controllers

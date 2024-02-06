@@ -1,5 +1,6 @@
 ﻿using Ekospoj.Data;
-using EkoSpojTest4.Conteiners;
+using Ekospoj.Model;
+using Ekospoj.Model.DTO.Requests;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;

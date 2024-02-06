@@ -1,6 +1,7 @@
 ﻿using Ekospoj.Data;
+using Ekospoj.Model.DTO.Requests;
 
-namespace EkoSpojTest4.Conteiners
+namespace Ekospoj.Model
 {
     public class ProjectDTO
     {
@@ -43,7 +44,7 @@ namespace EkoSpojTest4.Conteiners
         {
             foreach (Contact contact in contacts)
             {
-                Contacts.Add(new ContactDTO(contact, contact.ContactType));
+                Contacts.Add(new ContactDTO(contact));
             }
         }
     }
