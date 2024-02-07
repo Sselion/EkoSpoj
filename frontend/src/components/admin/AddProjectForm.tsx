@@ -1,3 +1,4 @@
+import React, { useState } from "react";
 import {
     Box, Button,
     Checkbox, Divider,
@@ -9,20 +10,51 @@ import {
     Select, SelectChangeEvent, Stack,
     TextField, Typography
 } from "@mui/material";
-import React, { useState } from "react";
 
-function AddProjectForm({ categoryArr }: { categoryArr: string[] }) {
+
+import { ProjectFormProps } from "./types";
+import RemoveButton from "./RemoveButton";
+
+
+function AddProjectForm({ categoryArr, projectTags }: ProjectFormProps) {
     const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
+    const [selectedTags, setSelectedTags] = useState<string[]>([]);
+    const [selectedContactType, setSelectedContactType] = useState<string>('');
+    const [addedContacts, setAddedContacts] = useState<string[]>([]);
 
-    const handleChange = (event: SelectChangeEvent<typeof selectedCategories>) => {
+    const handleCategoryChange = (event: SelectChangeEvent<typeof selectedCategories>) => {
         const value = event.target.value;
         setSelectedCategories(
             typeof value === 'string' ? value.split(',') : value,
         );
     };
 
+    const handleTagChange = (event: SelectChangeEvent<typeof selectedTags>) => {
+        const value = event.target.value;
+        setSelectedTags(
+            typeof value === 'string' ? value.split(',') : value,
+        );
+    };
 
-    return(
+    const handleContactTypeChange = (event: SelectChangeEvent<typeof selectedContactType>) => {
+        const value = event.target.value;
+        setSelectedContactType(value);
+    };
+
+    const handleContactAdd = () => {
+        if (selectedContactType && !addedContacts.includes(selectedContactType)) {
+            setAddedContacts(prevContacts => [...prevContacts, selectedContactType]);
+        }
+
+    };
+
+    const handleContactRemove = (contact: string) => {
+        setAddedContacts(prevValue => prevValue.filter(addedContacts => addedContacts !== contact))
+    };
+
+    const contactTypes= ["Facebook", "Youtube", "Instagram", "X", "LinkedIn", "TikTok"];
+
+    return (
         <>
             <TextField
                 id="project-name"
@@ -50,12 +82,25 @@ function AddProjectForm({ categoryArr }: { categoryArr: string[] }) {
                 name="project-logo-path"
                 fullWidth
             />
-            <TextField
-                id="tags-name"
-                label="Tagy (nutno oddělit čárkou!)"
-                name="tags-name"
-                fullWidth
-            />
+            <FormControl>
+                <InputLabel id="admin-tag-input">Tagy</InputLabel>
+                <Select
+                    labelId="admin-tag-input"
+                    id="admin-tag-input"
+                    multiple
+                    value={selectedTags}
+                    onChange={handleTagChange}
+                    input={<OutlinedInput label="Tagy"/>}
+                    renderValue={(selected) => selected.join(', ')}
+                >
+                    {projectTags.map((tag) => (
+                        <MenuItem key={tag} value={tag}>
+                            <Checkbox checked={selectedTags.includes(tag)}/>
+                            <ListItemText primary={tag}/>
+                        </MenuItem>
+                    ))}
+                </Select>
+            </FormControl>
             <FormControl>
                 <InputLabel id="admin-category-input">Kategorie</InputLabel>
                 <Select
@@ -63,7 +108,7 @@ function AddProjectForm({ categoryArr }: { categoryArr: string[] }) {
                     id="admin-category-input"
                     multiple
                     value={selectedCategories}
-                    onChange={handleChange}
+                    onChange={handleCategoryChange}
                     input={<OutlinedInput label="Kategorie"/>}
                     renderValue={(selected) => selected.join(', ')}
                 >
@@ -75,97 +120,76 @@ function AddProjectForm({ categoryArr }: { categoryArr: string[] }) {
                     ))}
                 </Select>
             </FormControl>
+
+            <Divider/>
+            {/*Kontakty*/}
             <Typography variant="body1">
                 Kontakty
             </Typography>
             <Stack direction="row" divider={<Divider orientation="vertical" flexItem/>}
                    spacing={2} justifyContent="space-between">
-                <Box sx={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
-                    <Typography>
-                        Web
-                    </Typography>
-                </Box>
+
                 <TextField
                     id="contact-web"
                     label="Web"
                     name="contact-web"
-                    sx={{ width: "480px" }}
+                    sx={{ width: "544px" }}
                 />
             </Stack>
-            <Stack direction="row" divider={<Divider orientation="vertical" flexItem/>}
-                   spacing={2} justifyContent="space-between">
-                <Box sx={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
-                    <Typography>
-                        Facebook
+
+            {/*Volitelné kontakty*/}
+            {addedContacts.map((contact) => (
+                <Stack key={contact} direction="row"
+                       justifyContent="space-between"
+                       alignItems="center"
+                       spacing={1}
+                >
+                    <TextField
+                        label={contact}
+                        name={`contact-${contact.toLowerCase()}`}
+                        fullWidth
+                    />
+                    <RemoveButton removeItem={() => handleContactRemove(contact)}/>
+                </Stack>
+            ))}
+
+            <Box sx={{ display: "flex", flexDirection: "row", alignItems: "center", justifyContent: "left", pt: 3 }}>
+                <FormControl sx={{ width: "200px" }}>
+                    <InputLabel id="contact-type-select">Typ kontaktu</InputLabel>
+                    <Select
+                        labelId="contact-type-select"
+                        id="contact-type-select"
+                        label="Typ kontaktu"
+                        value={selectedContactType}
+                        onChange={handleContactTypeChange}
+                    >
+                        {contactTypes.map((contact) => (
+                            !addedContacts.includes(contact) && (
+                                <MenuItem key={contact} value={contact}>{contact}</MenuItem>
+                           ))
+                        )}
+                    </Select>
+                </FormControl>
+                <Button onClick={handleContactAdd}
+                        sx={{
+                            ml: 5,
+                            backgroundColor: "#83C089",
+                            color: "white",
+                            "&:hover": {
+                                backgroundColor: "#83C089"
+                            },
+                            width: "300px"
+                        }}
+                >
+                    <Typography variant="subtitle1" display="bloc">
+                        Přidat kontakt
                     </Typography>
-                </Box>
-                <TextField
-                    id="contact-fb"
-                    label="Facebook"
-                    name="contact-fb"
-                    sx={{ width: "480px" }}
-                />
-            </Stack>
-            <Stack direction="row" divider={<Divider orientation="vertical" flexItem/>}
-                   spacing={2} justifyContent="space-between">
-                <Box sx={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
-                    <Typography>
-                        Instagram
-                    </Typography>
-                </Box>
-                <TextField
-                    id="contact-instagram"
-                    label="Instagram"
-                    name="contact-instagram"
-                    sx={{ width: "480px" }}
-                />
-            </Stack>
-            <Stack direction="row" divider={<Divider orientation="vertical" flexItem/>}
-                   spacing={2} justifyContent="space-between">
-                <Box sx={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
-                    <Typography>
-                        YouTube
-                    </Typography>
-                </Box>
-                <TextField
-                    id="contact-youtube"
-                    label="YouTube"
-                    name="contact-youtube"
-                    sx={{ width: "480px" }}
-                />
-            </Stack>
-            <Stack direction="row" divider={<Divider orientation="vertical" flexItem/>}
-                   spacing={2} justifyContent="space-between">
-                <Box sx={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
-                    <Typography>
-                        X
-                    </Typography>
-                </Box>
-                <TextField
-                    id="contact-x"
-                    label="X"
-                    name="contact-x"
-                    sx={{ width: "480px" }}
-                />
-            </Stack>
-            <Stack direction="row" divider={<Divider orientation="vertical" flexItem/>}
-                   spacing={2} justifyContent="space-between">
-                <Box sx={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
-                    <Typography>
-                        LinkedIn
-                    </Typography>
-                </Box>
-                <TextField
-                    id="contact-linkedin"
-                    label="LinkedIn"
-                    name="contact-linkedin"
-                    fullWidth
-                    sx={{ width: "480px" }}
-                />
-            </Stack>
+                </Button>
+            </Box>
+
+            <Divider />
             <Button type="submit"
                     sx={{
-                        mt: 2,
                         backgroundColor: "#83C089",
                         color: "white",
                         "&:hover": {

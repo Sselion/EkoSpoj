@@ -17,3 +17,12 @@ export interface AdminProps {
     categories: Record<string, any>[];
     fetchCategories: () => void;
 }
+
+export interface ProjectFormProps {
+    categoryArr:string[];
+    projectTags: string[];
+}
+
+export interface RemoveButtonProps {
+    removeItem: () => void;
+}

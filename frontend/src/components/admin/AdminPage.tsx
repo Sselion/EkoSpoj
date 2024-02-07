@@ -12,19 +12,38 @@ import { AdminProps } from "./types";
 import AddCategoryForm from "./AddCategoryForm";
 import AddProjectForm from "./AddProjectForm";
 
-// TODO: loginform; login check; form for new project, send it to BE; logout
-
-
 function AdminPage({ categories, fetchCategories }: AdminProps) {
     const [isLogged, setIsLogged] = useState(true);
     const [categoryArr, setCategoryArr] = useState<string[]>([]);
     const [selectedForm, setSelectedForm] = useState<number>(0);
+    const [projectTags, setProjectTags] = useState<string[]>([]);
 
 
     useEffect(() => {
         setCategoryArr(categories.map(category => category.name))
     }, [categories]);
 
+
+    useEffect(() => {
+        fetch("https://ekospoj.cz/adm/AdmTag", {
+            method: 'GET',
+        })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Network response was not ok');
+                }
+                return response.json();
+            })
+            .then(json => {
+                setProjectTags(json.map((tag) => tag.name));
+
+            })
+            .catch(error => {
+                window.alert(error);
+            });
+    }, []);
+
+// TODO: create login function
     function handleLogin() {
 
     }
@@ -76,7 +95,7 @@ function AdminPage({ categories, fetchCategories }: AdminProps) {
                             </Typography>
                             <Paper sx={{ p: 3, px: 5, width: "600px" }}>
                                 <Stack spacing={2}>
-                                    <AddProjectForm categoryArr={categoryArr}/>
+                                    <AddProjectForm categoryArr={categoryArr} projectTags={projectTags}/>
                                 </Stack>
                             </Paper>
                         </Stack>
