@@ -35,8 +35,7 @@ function AdminPage({ categories, fetchCategories }: AdminProps) {
                 return response.json();
             })
             .then(json => {
-                setProjectTags(json.map((tag) => tag.name));
-
+                setProjectTags(json.map((tag: Record<string, string>) => tag.name));
             })
             .catch(error => {
                 window.alert(error);

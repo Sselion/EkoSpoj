@@ -12,7 +12,7 @@ import {
 } from "@mui/material";
 
 
-import { ProjectFormProps } from "./types";
+import { ProjectFormProps, ProjectFormData } from "./types";
 import RemoveButton from "./RemoveButton";
 
 
@@ -21,6 +21,23 @@ function AddProjectForm({ categoryArr, projectTags }: ProjectFormProps) {
     const [selectedTags, setSelectedTags] = useState<string[]>([]);
     const [selectedContactType, setSelectedContactType] = useState<string>('');
     const [addedContacts, setAddedContacts] = useState<string[]>([]);
+    const [formData, setFormData] = useState<ProjectFormData>({
+        name: "",
+        shortDescription: "",
+        description: "",
+        projectLogoPath: "",
+        web: ""
+    });
+    const [contactData, setContactData] = useState<Record<string, string>>({});
+    const [isErrored, setIsErrored] = useState<boolean>(false);
+    const [isSubmitted, setIsSubmitted] = useState<boolean>(false);
+
+    const handleFormChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        event.preventDefault();
+        const { name, value } = event.target;
+
+        setFormData((prevValue: ProjectFormData) => ({ ...prevValue, [name]: value }))
+    };
 
     const handleCategoryChange = (event: SelectChangeEvent<typeof selectedCategories>) => {
         const value = event.target.value;
@@ -41,46 +58,129 @@ function AddProjectForm({ categoryArr, projectTags }: ProjectFormProps) {
         setSelectedContactType(value);
     };
 
+    const handleContactChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        event.preventDefault();
+        const { name, value } = event.target;
+        setContactData(prevValue => ({
+            ...prevValue,
+            [name]: value
+        }));
+    };
+
     const handleContactAdd = () => {
         if (selectedContactType && !addedContacts.includes(selectedContactType)) {
+            const contact = selectedContactType;
+            setSelectedContactType("");
             setAddedContacts(prevContacts => [...prevContacts, selectedContactType]);
         }
-
     };
 
     const handleContactRemove = (contact: string) => {
-        setAddedContacts(prevValue => prevValue.filter(addedContacts => addedContacts !== contact))
+        setAddedContacts(prevValue => prevValue.filter(addedContacts => addedContacts !== contact));
+        setSelectedContactType("");
+        setContactData(prevValue => ({
+            ...prevValue,
+            [contact]: ""
+        }));
     };
 
-    const contactTypes= ["Facebook", "Youtube", "Instagram", "X", "LinkedIn", "TikTok"];
+
+    const handleSubmit = (event: React.MouseEvent<HTMLButtonElement>) => {
+        event.preventDefault();
+        const formattedContacts = Object.entries(contactData).map(([key, value]) => ({
+            TypeName: key,
+            Value: value
+        }));
+        const newProjectData =
+            {
+                Name: formData.name,
+                Description: formData.description,
+                ShortDescription: formData.shortDescription,
+                logoPath: formData.projectLogoPath,
+                Tags: selectedTags,
+                Categories: selectedCategories,
+                Contacts: formattedContacts
+            };
+        console.log(newProjectData);
+        setFormData({
+            name: "",
+            shortDescription: "",
+            description: "",
+            projectLogoPath: "",
+            web: ""
+        });
+        setSelectedTags([]);
+        setSelectedCategories([]);
+        setContactData({});
+
+        fetch("https://ekospoj.cz/adm/AdmProject", {
+            method: "POST",
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify(newProjectData),
+        })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error('Chyba při odesílání');
+                }
+                return response.json();
+            })
+            .then(json => {
+                setFormData({
+                    name: "",
+                    shortDescription: "",
+                    description: "",
+                    projectLogoPath: "",
+                    web: ""
+                });
+                setSelectedTags([]);
+                setSelectedCategories([]);
+                setContactData({});
+                setIsErrored(false);
+                setIsSubmitted(true);
+            })
+            .catch(error => {
+                console.error('An error occurred:', error.message);
+                setIsSubmitted(false);
+                setIsErrored(true);
+            });
+    };
+
+
+    const contactTypes = ["Facebook", "Youtube", "Instagram", "X", "LinkedIn", "TikTok"];
 
     return (
         <>
             <TextField
-                id="project-name"
                 label="Název projektu"
-                name="project-name"
+                name="name"
                 fullWidth
+                value={formData.name}
+                onChange={handleFormChange}
             />
             <TextField
-                id="short-description"
                 label="Krátký popisek"
-                name="short-description"
+                name="shortDescription"
                 fullWidth
                 multiline
+                value={formData.shortDescription}
+                onChange={handleFormChange}
             />
             <TextField
-                id="description"
                 label="Popisek"
                 name="description"
                 fullWidth
                 multiline
+                value={formData.description}
+                onChange={handleFormChange}
             />
             <TextField
-                id="project-logo-path"
                 label="Cesta k logu"
-                name="project-logo-path"
+                name="projectLogoPath"
                 fullWidth
+                value={formData.projectLogoPath}
+                onChange={handleFormChange}
             />
             <FormControl>
                 <InputLabel id="admin-tag-input">Tagy</InputLabel>
@@ -128,11 +228,11 @@ function AddProjectForm({ categoryArr, projectTags }: ProjectFormProps) {
             </Typography>
             <Stack direction="row" divider={<Divider orientation="vertical" flexItem/>}
                    spacing={2} justifyContent="space-between">
-
                 <TextField
-                    id="contact-web"
                     label="Web"
-                    name="contact-web"
+                    name="web"
+                    value={formData.web}
+                    onChange={handleFormChange}
                     sx={{ width: "544px" }}
                 />
             </Stack>
@@ -146,8 +246,10 @@ function AddProjectForm({ categoryArr, projectTags }: ProjectFormProps) {
                 >
                     <TextField
                         label={contact}
-                        name={`contact-${contact.toLowerCase()}`}
+                        name={contact}
                         fullWidth
+                        value={contactData[contact] || ''}
+                        onChange={handleContactChange}
                     />
                     <RemoveButton removeItem={() => handleContactRemove(contact)}/>
                 </Stack>
@@ -164,9 +266,10 @@ function AddProjectForm({ categoryArr, projectTags }: ProjectFormProps) {
                         onChange={handleContactTypeChange}
                     >
                         {contactTypes.map((contact) => (
-                            !addedContacts.includes(contact) && (
-                                <MenuItem key={contact} value={contact}>{contact}</MenuItem>
-                           ))
+                                !addedContacts.includes(contact) && (
+
+                                    <MenuItem key={contact} value={contact}>{contact}</MenuItem>
+                                ))
                         )}
                     </Select>
                 </FormControl>
@@ -187,8 +290,8 @@ function AddProjectForm({ categoryArr, projectTags }: ProjectFormProps) {
                 </Button>
             </Box>
 
-            <Divider />
-            <Button type="submit"
+            <Divider/>
+            <Button type="submit" onClick={handleSubmit}
                     sx={{
                         backgroundColor: "#83C089",
                         color: "white",
@@ -201,6 +304,13 @@ function AddProjectForm({ categoryArr, projectTags }: ProjectFormProps) {
                     Odeslat
                 </Typography>
             </Button>
+            {(isSubmitted || isErrored) && (
+                <Box sx={{ mt: 1 }}>
+                    <Typography color={isErrored ? "red" : "green"} fontWeight="bold">
+                        { isErrored ? "Chyba při odesílání!" : "Úspěšně odesláno!"}
+                    </Typography>
+                </Box>
+            )}
         </>
     )
 }

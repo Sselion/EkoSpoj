@@ -1,5 +1,5 @@
-import React from "react";
-export interface FormData {
+
+export interface LoginFormData {
     name: string;
     password: string;
 }
@@ -26,3 +26,17 @@ export interface ProjectFormProps {
 export interface RemoveButtonProps {
     removeItem: () => void;
 }
+
+export interface NewCategory {
+    name: string;
+    shortName: string;
+}
+
+export interface ProjectFormData {
+    name?: string;
+    shortDescription?: string;
+    description?: string;
+    projectLogoPath?: string;
+    web?: string;
+}
+

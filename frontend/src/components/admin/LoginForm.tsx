@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { Box, Button, Stack, TextField, Typography } from "@mui/material";
-import { FormData, LoginFormProps } from "./types";
+import { LoginFormData, LoginFormProps } from "./types";
 
 
 function LoginForm({handleLogin}: LoginFormProps) {
-    const [formData, setFormData] = useState<FormData>({
+    const [formData, setFormData] = useState<LoginFormData>({
         name: "",
         password: ""
     })
@@ -13,7 +13,7 @@ function LoginForm({handleLogin}: LoginFormProps) {
         e.preventDefault();
         const { name, value } = e.target;
 
-        setFormData((prevData: FormData) => ({
+        setFormData((prevData: LoginFormData) => ({
             ...prevData, [name]: value
         }))
     };
