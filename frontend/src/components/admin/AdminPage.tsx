@@ -11,6 +11,7 @@ import NavButton from "./NavButton";
 import { AdminProps } from "./types";
 import AddCategoryForm from "./AddCategoryForm";
 import AddProjectForm from "./AddProjectForm";
+import AddTag from "./AddTag";
 
 function AdminPage({ categories, fetchCategories }: AdminProps) {
     const [isLogged, setIsLogged] = useState(true);
@@ -69,7 +70,10 @@ function AdminPage({ categories, fetchCategories }: AdminProps) {
                             <NavButton type="Přidat kategorii" onClick={() => handleButtonClick(1)}/>
                         </Grid>
                         <Grid item>
-                            <NavButton type="Přidat projekt" onClick={() => handleButtonClick(2)}/>
+                            <NavButton type="Přidat tag" onClick={() => handleButtonClick(2)}/>
+                        </Grid>
+                        <Grid item>
+                            <NavButton type="Přidat projekt" onClick={() => handleButtonClick(3)}/>
                         </Grid>
                     </Grid>
 
@@ -87,6 +91,19 @@ function AdminPage({ categories, fetchCategories }: AdminProps) {
                         </Stack>
                     )}
                     {selectedForm === 2 && (
+                        <Stack direction="column"
+                               sx={{ mt: 5, width: "100%", justifyContent: 'center', alignItems: 'center' }}>
+                            <Typography variant="h4" display="block" gutterBottom>
+                                Tag
+                            </Typography>
+                            <Paper sx={{ p: 3, px: 5, width: "600px" }}>
+                                <Stack spacing={2}>
+                                    <AddTag/>
+                                </Stack>
+                            </Paper>
+                        </Stack>
+                    )}
+                    {selectedForm === 3 && (
                         <Stack direction="column"
                                sx={{ mt: 5, width: "100%", justifyContent: 'center', alignItems: 'center' }}>
                             <Typography variant="h4" display="block" gutterBottom>
