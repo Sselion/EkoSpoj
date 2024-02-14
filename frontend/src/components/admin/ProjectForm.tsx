@@ -16,7 +16,7 @@ import { ProjectFormProps, ProjectFormData } from "./types";
 import RemoveButton from "./RemoveButton";
 
 
-function AddProjectForm({ categoryArr, projectTags }: ProjectFormProps) {
+function ProjectForm({ categoryArr, projectTags }: ProjectFormProps) {
     const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
     const [selectedTags, setSelectedTags] = useState<string[]>([]);
     const [selectedContactType, setSelectedContactType] = useState<string>('');
@@ -84,9 +84,10 @@ function AddProjectForm({ categoryArr, projectTags }: ProjectFormProps) {
         }));
     };
 
-
     const handleSubmit = (event: React.MouseEvent<HTMLButtonElement>) => {
         event.preventDefault();
+        if(formData.name !== "") {
+
         const formattedContacts = Object.entries(contactData).map(([key, value]) => ({
             TypeName: key,
             Value: value
@@ -145,6 +146,7 @@ function AddProjectForm({ categoryArr, projectTags }: ProjectFormProps) {
                 setIsSubmitted(false);
                 setIsErrored(true);
             });
+        }
     };
 
 
@@ -152,6 +154,9 @@ function AddProjectForm({ categoryArr, projectTags }: ProjectFormProps) {
 
     return (
         <>
+            <Typography variant="h4" display="block" gutterBottom>
+                Přidat projekt
+            </Typography>
             <TextField
                 label="Název projektu"
                 name="name"
@@ -315,4 +320,4 @@ function AddProjectForm({ categoryArr, projectTags }: ProjectFormProps) {
     )
 }
 
-export default AddProjectForm;
+export default ProjectForm;

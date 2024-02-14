@@ -1,37 +1,28 @@
 import React, { useState } from "react";
 import { Box, Button, TextField, Typography } from "@mui/material";
-import { NewCategory } from "./types";
 
 
-function AddCategoryForm() {
-
-    const [newCategory, setNewCategory] = useState<NewCategory>({
-        name: "",
-        shortName: ""
-    });
+function TagForm() {
+    const [newTag, setNewTag] = useState<string>("");
     const [isErrored, setIsErrored] = useState<boolean>(false);
     const [isSubmitted, setIsSubmitted] = useState<boolean>(false);
 
-    const handleCategoryChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        e.preventDefault();
-        const { name, value } = e.target;
-
-        setNewCategory((prevData: NewCategory) => ({
-            ...prevData, [name]: value
-        }))
-    };
+    const handleTagChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const value = e.target.value;
+        setNewTag(value);
+    }
 
     const handleSubmit = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
         e.preventDefault();
 
-        if (newCategory.name !== "" && newCategory.shortName !== "") {
-
+        // TODO: vložit správnou API, upravit strukturu statetu
+        if (newTag !== "") {
             fetch("https://ekospoj.cz/adm/AdmCategory", {
-                method: 'POST',
+                method: "POST",
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify(newCategory),
+                body: JSON.stringify(newTag),
             })
                 .then(response => {
                     if (!response.ok) {
@@ -40,10 +31,7 @@ function AddCategoryForm() {
                     return response.json();
                 })
                 .then(json => {
-                    setNewCategory({
-                        name: "",
-                        shortName: ""
-                    });
+                    setNewTag("");
                     setIsErrored(false);
                     setIsSubmitted(true);
                 })
@@ -55,21 +43,16 @@ function AddCategoryForm() {
         }
     }
 
-
     return (
         <>
+            <Typography variant="h4" display="block" gutterBottom>
+                Přidat tag
+            </Typography>
             <TextField
-                label="Název kategorie"
+                label="Název tagu"
                 name="name"
-                value={newCategory.name}
-                onChange={handleCategoryChange}
-                fullWidth
-            />
-            <TextField
-                label="shortName"
-                name="shortName"
-                value={newCategory.shortName}
-                onChange={handleCategoryChange}
+                value={newTag}
+                onChange={handleTagChange}
                 fullWidth
             />
             <Button type="submit" onClick={handleSubmit}
@@ -89,7 +72,7 @@ function AddCategoryForm() {
             {(isSubmitted || isErrored) && (
                 <Box sx={{ mt: 1 }}>
                     <Typography color={isErrored ? "red" : "green"} fontWeight="bold">
-                        { isErrored ? "Chyba při odesílání!" : "Úspěšně odesláno!"}
+                        {isErrored ? "Chyba při odesílání!" : "Úspěšně odesláno!"}
                     </Typography>
                 </Box>
             )}
@@ -98,4 +81,4 @@ function AddCategoryForm() {
     )
 }
 
-export default AddCategoryForm;
+export default TagForm;

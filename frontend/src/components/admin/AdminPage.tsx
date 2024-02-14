@@ -9,16 +9,16 @@ import {
 import LoginForm from "./LoginForm";
 import NavButton from "./NavButton";
 import { AdminProps } from "./types";
-import AddCategoryForm from "./AddCategoryForm";
-import AddProjectForm from "./AddProjectForm";
-import AddTag from "./AddTag";
+import CategoryForm from "./CategoryForm";
+import ProjectForm from "./ProjectForm";
+import TagForm from "./TagForm";
 
 function AdminPage({ categories, fetchCategories }: AdminProps) {
     const [isLogged, setIsLogged] = useState(true);
     const [categoryArr, setCategoryArr] = useState<string[]>([]);
     const [selectedForm, setSelectedForm] = useState<number>(0);
     const [projectTags, setProjectTags] = useState<string[]>([]);
-
+    const [selection, setSelection] = useState<number>(0);
 
     useEffect(() => {
         setCategoryArr(categories.map(category => category.name))
@@ -47,7 +47,12 @@ function AdminPage({ categories, fetchCategories }: AdminProps) {
     function handleLogin() {
 
     }
-    const handleButtonClick = (formNumber: number) => {
+
+    const handleSelectionClick= (selectionNumber: number) => {
+        setSelection(selectionNumber)
+        setSelectedForm(0);
+    }
+    const handleDetailButtonClick = (formNumber: number) => {
         setSelectedForm(formNumber);
     };
 
@@ -66,52 +71,48 @@ function AdminPage({ categories, fetchCategories }: AdminProps) {
                     justifyContent: 'center'
                 }}>
                     <Grid container columnSpacing={{ xs: 2 }} sx={{ justifyContent: 'center' }}>
-                        <Grid item>
-                            <NavButton type="Přidat kategorii" onClick={() => handleButtonClick(1)}/>
+                        <Grid container columnSpacing={{ xs: 2 }} sx={{ justifyContent: 'center', mb: 2 }}>
+                            <Grid item>
+                                <NavButton type="Přidat" onClick={() => handleSelectionClick(1)}/>
+                            </Grid>
+                            <Grid item>
+                                <NavButton type="Upravit" onClick={() => handleSelectionClick(2)} />
+                            </Grid>
+                            <Grid item>
+                                <NavButton type="Smazat" onClick={() => handleSelectionClick(3)}/>
+                            </Grid>
+
                         </Grid>
-                        <Grid item>
-                            <NavButton type="Přidat tag" onClick={() => handleButtonClick(2)}/>
-                        </Grid>
-                        <Grid item>
-                            <NavButton type="Přidat projekt" onClick={() => handleButtonClick(3)}/>
-                        </Grid>
+
+                        {selection === 1 &&
+                        (<Grid container columnSpacing={{ xs: 2 }} sx={{ justifyContent: 'center' }}>
+                            <Grid item>
+                                <NavButton type="Přidat kategorii" onClick={() => handleDetailButtonClick(1)}/>
+                            </Grid>
+                            <Grid item>
+                                <NavButton type="Přidat tag" onClick={() => handleDetailButtonClick(2)}/>
+                            </Grid>
+                            <Grid item>
+                                <NavButton type="Přidat projekt" onClick={() => handleDetailButtonClick(3)}/>
+                            </Grid>
+                        </Grid>)
+                        }
                     </Grid>
 
-                    {selectedForm === 1 && (
+                    {selectedForm !== 0 && (
                         <Stack direction="column"
                                sx={{ mt: 5, width: "100%", justifyContent: 'center', alignItems: 'center' }}>
-                            <Typography variant="h4" display="block" gutterBottom>
-                                Přidat kategorii
-                            </Typography>
                             <Paper sx={{ p: 3, px: 5, width: "600px" }}>
                                 <Stack spacing={2}>
-                                    <AddCategoryForm/>
-                                </Stack>
-                            </Paper>
-                        </Stack>
-                    )}
-                    {selectedForm === 2 && (
-                        <Stack direction="column"
-                               sx={{ mt: 5, width: "100%", justifyContent: 'center', alignItems: 'center' }}>
-                            <Typography variant="h4" display="block" gutterBottom>
-                                Tag
-                            </Typography>
-                            <Paper sx={{ p: 3, px: 5, width: "600px" }}>
-                                <Stack spacing={2}>
-                                    <AddTag/>
-                                </Stack>
-                            </Paper>
-                        </Stack>
-                    )}
-                    {selectedForm === 3 && (
-                        <Stack direction="column"
-                               sx={{ mt: 5, width: "100%", justifyContent: 'center', alignItems: 'center' }}>
-                            <Typography variant="h4" display="block" gutterBottom>
-                                Přidat projekt
-                            </Typography>
-                            <Paper sx={{ p: 3, px: 5, width: "600px" }}>
-                                <Stack spacing={2}>
-                                    <AddProjectForm categoryArr={categoryArr} projectTags={projectTags}/>
+                                    {selectedForm === 1 && (
+                                        <CategoryForm/>
+                                    )}
+                                    {selectedForm === 2 && (
+                                        <TagForm/>
+                                    )}
+                                    {selectedForm === 3 && (
+                                        <ProjectForm categoryArr={categoryArr} projectTags={projectTags}/>
+                                    )}
                                 </Stack>
                             </Paper>
                         </Stack>
