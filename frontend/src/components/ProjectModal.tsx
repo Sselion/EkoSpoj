@@ -48,8 +48,8 @@ function ProjectModal({ handleClose, isOpen, project }: ProjectModalProps) {
                 </Typography>
                 <Box mt={2} sx={{ display: "flex", justifyContent: "center" }}>
                     {project.contacts.map((contact: Record<string, any>, index: number) => (
-                        <Tooltip title={contact.typeName}>
-                            <a key={index} href={contact.value} target="_blank" rel="noopener noreferrer"
+                        <Tooltip title={contact.typeName} key={`${contact.typeName}-${index}`}>
+                            <a key={contact.value} href={contact.value} target="_blank" rel="noopener noreferrer"
                                className="icon-link">
                                 {contact.typeName === "Web" && <LanguageIcon/>}
                                 {contact.typeName === "Facebook" && <FacebookIcon/>}
