@@ -3,7 +3,7 @@ import { Box, Button, TextField, Typography } from "@mui/material";
 import { NewCategory } from "./types";
 
 
-function CategoryForm() {
+function CategoryForm({type}: string) {
 
     const [newCategory, setNewCategory] = useState<NewCategory>({
         name: "",
@@ -59,7 +59,7 @@ function CategoryForm() {
     return (
         <>
             <Typography variant="h4" display="block" gutterBottom>
-                Přidat kategorii
+                {type} kategorii
             </Typography>
             <TextField
                 label="Název kategorie"
@@ -67,6 +67,8 @@ function CategoryForm() {
                 value={newCategory.name}
                 onChange={handleCategoryChange}
                 fullWidth
+                disabled={type === 'Smazat'}
+                sx={{ backgroundColor: type === 'Smazat' ? '#f5f5f5' : 'transparent' }}
             />
             <TextField
                 label="shortName"
@@ -74,6 +76,8 @@ function CategoryForm() {
                 value={newCategory.shortName}
                 onChange={handleCategoryChange}
                 fullWidth
+                disabled={type === 'Smazat'}
+                sx={{ backgroundColor: type === 'Smazat' ? '#f5f5f5' : 'transparent' }}
             />
             <Button type="submit" onClick={handleSubmit}
                     sx={{

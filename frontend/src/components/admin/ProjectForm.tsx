@@ -16,7 +16,7 @@ import { ProjectFormProps, ProjectFormData } from "./types";
 import RemoveButton from "./RemoveButton";
 
 
-function ProjectForm({ categoryArr, projectTags }: ProjectFormProps) {
+function ProjectForm({ categoryArr, projectTags, type }: ProjectFormProps) {
     const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
     const [selectedTags, setSelectedTags] = useState<string[]>([]);
     const [selectedContactType, setSelectedContactType] = useState<string>('');
@@ -155,7 +155,7 @@ function ProjectForm({ categoryArr, projectTags }: ProjectFormProps) {
     return (
         <>
             <Typography variant="h4" display="block" gutterBottom>
-                Přidat projekt
+                {type} projekt
             </Typography>
             <TextField
                 label="Název projektu"
@@ -163,6 +163,8 @@ function ProjectForm({ categoryArr, projectTags }: ProjectFormProps) {
                 fullWidth
                 value={formData.name}
                 onChange={handleFormChange}
+                disabled={type === 'Smazat'}
+                sx={{ backgroundColor: type === 'Smazat' ? '#f5f5f5' : 'transparent' }}
             />
             <TextField
                 label="Krátký popisek"
@@ -171,6 +173,8 @@ function ProjectForm({ categoryArr, projectTags }: ProjectFormProps) {
                 multiline
                 value={formData.shortDescription}
                 onChange={handleFormChange}
+                disabled={type === 'Smazat'}
+                sx={{ backgroundColor: type === 'Smazat' ? '#f5f5f5' : 'transparent' }}
             />
             <TextField
                 label="Popisek"
@@ -179,6 +183,8 @@ function ProjectForm({ categoryArr, projectTags }: ProjectFormProps) {
                 multiline
                 value={formData.description}
                 onChange={handleFormChange}
+                disabled={type === 'Smazat'}
+                sx={{ backgroundColor: type === 'Smazat' ? '#f5f5f5' : 'transparent' }}
             />
             <TextField
                 label="Cesta k logu"
@@ -186,6 +192,8 @@ function ProjectForm({ categoryArr, projectTags }: ProjectFormProps) {
                 fullWidth
                 value={formData.projectLogoPath}
                 onChange={handleFormChange}
+                disabled={type === 'Smazat'}
+                sx={{ backgroundColor: type === 'Smazat' ? '#f5f5f5' : 'transparent' }}
             />
             <FormControl>
                 <InputLabel id="admin-tag-input">Tagy</InputLabel>
@@ -197,6 +205,8 @@ function ProjectForm({ categoryArr, projectTags }: ProjectFormProps) {
                     onChange={handleTagChange}
                     input={<OutlinedInput label="Tagy"/>}
                     renderValue={(selected) => selected.join(', ')}
+                    disabled={type === 'Smazat'}
+                    sx={{ backgroundColor: type === 'Smazat' ? '#f5f5f5' : 'transparent' }}
                 >
                     {projectTags.map((tag) => (
                         <MenuItem key={tag} value={tag}>
@@ -216,6 +226,8 @@ function ProjectForm({ categoryArr, projectTags }: ProjectFormProps) {
                     onChange={handleCategoryChange}
                     input={<OutlinedInput label="Kategorie"/>}
                     renderValue={(selected) => selected.join(', ')}
+                    disabled={type === 'Smazat'}
+                    sx={{ backgroundColor: type === 'Smazat' ? '#f5f5f5' : 'transparent' }}
                 >
                     {categoryArr.map((category) => (
                         <MenuItem key={category} value={category}>
@@ -238,7 +250,8 @@ function ProjectForm({ categoryArr, projectTags }: ProjectFormProps) {
                     name="web"
                     value={formData.web}
                     onChange={handleFormChange}
-                    sx={{ width: "544px" }}
+                    disabled={type === 'Smazat'}
+                    sx={{width: "544px", backgroundColor: type === 'Smazat' ? '#f5f5f5' : 'transparent' }}
                 />
             </Stack>
 
@@ -255,8 +268,10 @@ function ProjectForm({ categoryArr, projectTags }: ProjectFormProps) {
                         fullWidth
                         value={contactData[contact] || ''}
                         onChange={handleContactChange}
+                        disabled={type === 'Smazat'}
+                        sx={{backgroundColor: type === 'Smazat' ? '#f5f5f5' : 'transparent' }}
                     />
-                    <RemoveButton removeItem={() => handleContactRemove(contact)}/>
+                    <RemoveButton removeItem={() => handleContactRemove(contact)} type={type}/>
                 </Stack>
             ))}
 
@@ -269,16 +284,17 @@ function ProjectForm({ categoryArr, projectTags }: ProjectFormProps) {
                         label="Typ kontaktu"
                         value={selectedContactType}
                         onChange={handleContactTypeChange}
+                        disabled={type === 'Smazat'}
+                        sx={{backgroundColor: type === 'Smazat' ? '#f5f5f5' : 'transparent' }}
                     >
                         {contactTypes.map((contact) => (
                                 !addedContacts.includes(contact) && (
-
                                     <MenuItem key={contact} value={contact}>{contact}</MenuItem>
                                 ))
                         )}
                     </Select>
                 </FormControl>
-                <Button onClick={handleContactAdd}
+                <Button onClick={handleContactAdd} disabled={type === 'Smazat'}
                         sx={{
                             ml: 5,
                             backgroundColor: "#83C089",

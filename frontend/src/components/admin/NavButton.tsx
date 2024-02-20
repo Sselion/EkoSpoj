@@ -6,21 +6,21 @@ import { NavButtonProps } from "./types";
 function NavButton({type, onClick}: NavButtonProps) {
     return (
             <Button onClick={onClick} sx={{
-                borderRadius: "20px",
-                color: "#297229",
-                backgroundColor: "#E8FFE8",
+                borderRadius: "5px",
+                color: "white",
+                backgroundColor: "#83C089",
                 p: 1,
                 px: 2,
                 boxShadow: "rgba(0, 0, 0, 0.24) 0px 3px 8px",
                 "&:hover": {
-                    backgroundColor: "#e8ffe8"
+                    backgroundColor: "#83C089"
                 },
                 "&:active, &:focus": {
-                    backgroundColor: "#83C089",
-                    color: "white",
+                    backgroundColor: "#E8FFE8",
+                    color: "#297229",
                 },
             }}>
-                <Typography variant="caption">
+                <Typography variant="body1">
                     {type}
                 </Typography>
             </Button>

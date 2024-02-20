@@ -3,7 +3,7 @@ import {
     Box,
     Grid,
     Stack,
-    Typography,
+    Button,
     Paper,
 } from "@mui/material";
 import LoginForm from "./LoginForm";
@@ -12,6 +12,7 @@ import { AdminProps } from "./types";
 import CategoryForm from "./CategoryForm";
 import ProjectForm from "./ProjectForm";
 import TagForm from "./TagForm";
+import SubNavButton from "./SubNavButton";
 
 function AdminPage({ categories, fetchCategories }: AdminProps) {
     const [isLogged, setIsLogged] = useState(true);
@@ -19,6 +20,7 @@ function AdminPage({ categories, fetchCategories }: AdminProps) {
     const [selectedForm, setSelectedForm] = useState<number>(0);
     const [projectTags, setProjectTags] = useState<string[]>([]);
     const [selection, setSelection] = useState<number>(0);
+    const [selectedType, setSelectedType] = useState<string>('');
 
     useEffect(() => {
         setCategoryArr(categories.map(category => category.name))
@@ -45,12 +47,16 @@ function AdminPage({ categories, fetchCategories }: AdminProps) {
 
 // TODO: create login function
     function handleLogin() {
-
+        setIsLogged(true);
+    }
+    function handleLogout() {
+        setIsLogged(false);
     }
 
-    const handleSelectionClick= (selectionNumber: number) => {
-        setSelection(selectionNumber)
+    const handleSelectionClick= (selectionNumber: number, type: string) => {
+        setSelection(selectionNumber);
         setSelectedForm(0);
+        setSelectedType(type);
     }
     const handleDetailButtonClick = (formNumber: number) => {
         setSelectedForm(formNumber);
@@ -70,16 +76,16 @@ function AdminPage({ categories, fetchCategories }: AdminProps) {
                     textAlign: "center",
                     justifyContent: 'center'
                 }}>
-                    <Grid container columnSpacing={{ xs: 2 }} sx={{ justifyContent: 'center' }}>
-                        <Grid container columnSpacing={{ xs: 2 }} sx={{ justifyContent: 'center', mb: 2 }}>
+                    <Grid container columnSpacing={{ xs: 2 }} sx={{ justifyContent: 'center'}}>
+                        <Grid container columnSpacing={{ xs: 2 }} sx={{ justifyContent: 'center', mb: 2}}>
                             <Grid item>
-                                <NavButton type="Přidat" onClick={() => handleSelectionClick(1)}/>
+                                <NavButton type="Přidat" onClick={() => handleSelectionClick(1, "Přidat")}/>
                             </Grid>
                             <Grid item>
-                                <NavButton type="Upravit" onClick={() => handleSelectionClick(2)} />
+                                <NavButton type="Upravit" onClick={() => handleSelectionClick(2, "Upravit")} />
                             </Grid>
                             <Grid item>
-                                <NavButton type="Smazat" onClick={() => handleSelectionClick(3)}/>
+                                <NavButton type="Smazat" onClick={() => handleSelectionClick(3, "Smazat")}/>
                             </Grid>
 
                         </Grid>
@@ -87,15 +93,41 @@ function AdminPage({ categories, fetchCategories }: AdminProps) {
                         {selection === 1 &&
                         (<Grid container columnSpacing={{ xs: 2 }} sx={{ justifyContent: 'center' }}>
                             <Grid item>
-                                <NavButton type="Přidat kategorii" onClick={() => handleDetailButtonClick(1)}/>
+                                <SubNavButton type="Přidat kategorii" onClick={() => handleDetailButtonClick(1)}/>
                             </Grid>
                             <Grid item>
-                                <NavButton type="Přidat tag" onClick={() => handleDetailButtonClick(2)}/>
+                                <SubNavButton type="Přidat tag" onClick={() => handleDetailButtonClick(2)}/>
                             </Grid>
                             <Grid item>
-                                <NavButton type="Přidat projekt" onClick={() => handleDetailButtonClick(3)}/>
+                                <SubNavButton type="Přidat projekt" onClick={() => handleDetailButtonClick(3)}/>
                             </Grid>
                         </Grid>)
+                        }
+                        {selection === 2 &&
+                            (<Grid container columnSpacing={{ xs: 2 }} sx={{ justifyContent: 'center' }}>
+                                <Grid item>
+                                    <SubNavButton type="Upravit kategorii" onClick={() => handleDetailButtonClick(1)}/>
+                                </Grid>
+                                <Grid item>
+                                    <SubNavButton type="Upravit tag" onClick={() => handleDetailButtonClick(2)}/>
+                                </Grid>
+                                <Grid item>
+                                    <SubNavButton type="Upravit projekt" onClick={() => handleDetailButtonClick(3)}/>
+                                </Grid>
+                            </Grid>)
+                        }
+                        {selection === 3 &&
+                            (<Grid container columnSpacing={{ xs: 2 }} sx={{ justifyContent: 'center' }}>
+                                <Grid item>
+                                    <SubNavButton type="Smazat kategorii" onClick={() => handleDetailButtonClick(1)}/>
+                                </Grid>
+                                <Grid item>
+                                    <SubNavButton type="Smazat tag" onClick={() => handleDetailButtonClick(2)}/>
+                                </Grid>
+                                <Grid item>
+                                    <SubNavButton type="Smazat projekt" onClick={() => handleDetailButtonClick(3)}/>
+                                </Grid>
+                            </Grid>)
                         }
                     </Grid>
 
@@ -104,15 +136,9 @@ function AdminPage({ categories, fetchCategories }: AdminProps) {
                                sx={{ mt: 5, width: "100%", justifyContent: 'center', alignItems: 'center' }}>
                             <Paper sx={{ p: 3, px: 5, width: "600px" }}>
                                 <Stack spacing={2}>
-                                    {selectedForm === 1 && (
-                                        <CategoryForm/>
-                                    )}
-                                    {selectedForm === 2 && (
-                                        <TagForm/>
-                                    )}
-                                    {selectedForm === 3 && (
-                                        <ProjectForm categoryArr={categoryArr} projectTags={projectTags}/>
-                                    )}
+                                    {selectedForm === 1 && <CategoryForm type={selectedType}/>}
+                                    {selectedForm === 2 && <TagForm type={selectedType}/>}
+                                    {selectedForm === 3 && <ProjectForm type={selectedType} categoryArr={categoryArr} projectTags={projectTags}/>}
                                 </Stack>
                             </Paper>
                         </Stack>

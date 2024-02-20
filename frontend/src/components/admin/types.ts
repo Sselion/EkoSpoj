@@ -21,10 +21,12 @@ export interface AdminProps {
 export interface ProjectFormProps {
     categoryArr:string[];
     projectTags: string[];
+    type: string;
 }
 
 export interface RemoveButtonProps {
     removeItem: () => void;
+    type: string;
 }
 
 export interface NewCategory {

@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Box, Button, TextField, Typography } from "@mui/material";
 
 
-function TagForm() {
+function TagForm({type}: string) {
     const [newTag, setNewTag] = useState<string>("");
     const [isErrored, setIsErrored] = useState<boolean>(false);
     const [isSubmitted, setIsSubmitted] = useState<boolean>(false);
@@ -46,7 +46,7 @@ function TagForm() {
     return (
         <>
             <Typography variant="h4" display="block" gutterBottom>
-                Přidat tag
+                {type} tag
             </Typography>
             <TextField
                 label="Název tagu"
@@ -54,6 +54,8 @@ function TagForm() {
                 value={newTag}
                 onChange={handleTagChange}
                 fullWidth
+                disabled={type === 'Smazat'}
+                sx={{ backgroundColor: type === 'Smazat' ? '#f5f5f5' : 'transparent' }}
             />
             <Button type="submit" onClick={handleSubmit}
                     sx={{
