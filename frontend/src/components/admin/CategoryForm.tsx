@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { Box, Button, TextField, Typography } from "@mui/material";
 import { NewCategory } from "./types";
+import { Type } from "./types";
 
-
-function CategoryForm({type}: string) {
+function CategoryForm({type}: Type) {
 
     const [newCategory, setNewCategory] = useState<NewCategory>({
         name: "",

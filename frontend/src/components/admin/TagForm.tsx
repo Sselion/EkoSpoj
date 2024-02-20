@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { Box, Button, TextField, Typography } from "@mui/material";
+import { Type } from "./types";
 
-
-function TagForm({type}: string) {
+function TagForm({type}: Type) {
     const [newTag, setNewTag] = useState<string>("");
     const [isErrored, setIsErrored] = useState<boolean>(false);
     const [isSubmitted, setIsSubmitted] = useState<boolean>(false);

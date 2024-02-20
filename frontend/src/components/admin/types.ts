@@ -42,3 +42,6 @@ export interface ProjectFormData {
     web?: string;
 }
 
+export interface Type {
+    type: string;
+}
